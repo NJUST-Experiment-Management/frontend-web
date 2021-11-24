@@ -19,7 +19,6 @@ request.interceptors.request.use(config => {
     let userJson = sessionStorage.getItem("user")
 
     if (!whiteUrls.includes(config.url)) {  // 校验请求白名单
-        console.log("校验请求白名单")
         if(!userJson) {
             router.push("/login")
         } else {
@@ -36,12 +35,9 @@ request.interceptors.request.use(config => {
 // 可以在接口响应后统一处理结果
 request.interceptors.response.use(
     response => {
-        console.log(response);
         let res = response.data;
-        console.log(res)
         // 如果是返回的文件
         if (response.config.responseType === 'blob') {
-            console.log("isfile")
             return res
         }
         // 兼容服务端返回的字符串数据

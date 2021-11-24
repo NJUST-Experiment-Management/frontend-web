@@ -1,25 +1,27 @@
 <template>
-  <el-card class="box-card">
-    <el-form ref="form" :model="form" size="normal" :rules="rules" style="padding: 0 5%  0  5% ">
-      <el-form-item prop="id" >
-        <el-input  prefix-icon="el-icon-user-solid" v-model="form.userId" placeholder="请输入账号"></el-input>
-      </el-form-item>
-      <el-form-item prop="pwd">
-        <el-input prefix-icon="el-icon-lock" v-model="form.password" show-password placeholder="请输入密码"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <div style="display: flex;justify-content: center;">
-          <el-input prefix-icon="el-icon-key" v-model="form.validCode" style="width: 50%; margin-right: 5%" placeholder="请输入验证码"></el-input>
-          <div class="validCode">
-            <ValidCode @input="createValidCode" />
+  <el-row class="row-bg" justify="center" style="margin-top: 150px">
+    <el-card class="box-card">
+      <el-form ref="form" :model="form" size="normal" :rules="rules" style="padding: 0 5%  0  5% ;margin-top: 10px;">
+        <el-form-item prop="id" >
+          <el-input  prefix-icon="el-icon-user-solid" v-model="form.userId" placeholder="请输入账号"></el-input>
+        </el-form-item>
+        <el-form-item prop="pwd">
+          <el-input prefix-icon="el-icon-lock" v-model="form.password" show-password placeholder="请输入密码"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <div style="display: flex;justify-content: center;">
+            <el-input prefix-icon="el-icon-key" v-model="form.validCode" style="width: 50%; margin-right: 5%" placeholder="请输入验证码"></el-input>
+            <div class="validCode">
+              <ValidCode @input="createValidCode" />
+            </div>
           </div>
-        </div>
-      </el-form-item>
-      <el-form-item>
-        <el-button style="width: 100%" type="primary" @click="login">登 录</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
+        </el-form-item>
+        <el-form-item>
+          <el-button style="width: 100%" type="primary" @click="login">登 录</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+  </el-row>
 </template>
 
 <script>
@@ -66,7 +68,6 @@ export default {
           }
           request.post("/login", this.form).then(res => {
             if (res.code === '0') {
-              console.log("code")
               this.$message({
                 type: "success",
                 message: "登录成功"
