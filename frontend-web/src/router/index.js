@@ -7,6 +7,13 @@ const routes = [
     name: 'Layout',
     component: Layout,
     redirect: "/lab",
+    children: [
+      {
+        path: '/lab',
+        name: 'Lab',
+        component: () => import('@/views/Lab')
+      },
+    ]
   },
   {
     path: '/login',
@@ -27,7 +34,7 @@ router.beforeEach((to, from, next) => {
     // 判断sessionStorage是否保存了用户信息
     let userStr = sessionStorage.getItem("user") || "{}"
     let user = JSON.parse(userStr)
-    if (!user.id) {
+    if (!user) {
       // 跳转到登录页面
       next({path: "/login"})
     } else {
