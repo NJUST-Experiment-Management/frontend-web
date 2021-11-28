@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
     // 判断sessionStorage是否保存了用户信息
     let userStr = sessionStorage.getItem("user") || "{}"
     let user = JSON.parse(userStr)
-    if (!user) {
+    if (!user.userId) {
       // 跳转到登录页面
       next({path: "/login"})
     } else {
