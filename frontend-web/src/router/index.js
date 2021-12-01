@@ -6,13 +6,43 @@ const routes = [
     path: '/',
     name: 'Layout',
     component: Layout,
-    redirect: "/lab",
+    redirect: "/adminPage",
     children: [
       {
-        path: '/lab',
-        name: 'Lab',
-        component: () => import('@/views/Lab')
+        path: '/adminPage',
+        name: 'AdminPage',
+        component: () => import('@/views/AdminPage')
       },
+      {
+        path: '/adminExamManage',
+        name: 'AdminExamManage',
+        component: () => import('@/views/AdminExamManage')
+      },
+      {
+        path: '/adminRoomManage',
+        name: 'AdminRoomManage',
+        component: () => import('@/views/AdminRoomManage')
+      },
+      {
+        path: '/courseQuery',
+        name: 'CourseQuery',
+        component: () => import('@/views/CourseQuery')
+      },
+      {
+        path: '/adminAddAdmin',
+        name: 'AdminAddAdmin',
+        component: () => import('@/views/AdminAddAdmin')
+      },
+      {
+        path: '/adminMsgHistory',
+        name: 'AdminMsgHistory',
+        component: () => import('@/views/AdminMsgHistory')
+      },
+      {
+        path: '/adminMsgRelease',
+        name: 'AdminMsgRelease',
+        component: () => import('@/views/AdminMsgRelease')
+      }
     ]
   },
   {
@@ -26,9 +56,9 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-// 限制某些页面禁止未登录访问
-let limitPagePath = ["/lab"]
-
+//限制某些页面禁止未登录访问
+// let limitPagePath = ["/adminPage"]
+let limitPagePath = []
 router.beforeEach((to, from, next) => {
   if (limitPagePath.includes(to.path)) {
     // 判断sessionStorage是否保存了用户信息
