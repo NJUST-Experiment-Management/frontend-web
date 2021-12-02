@@ -13,26 +13,38 @@ const routes = [
         name: 'AdminPage',
         component: () => import('@/views/AdminPage')
       },
-      {
-        path: '/adminExamManage',
-        name: 'AdminExamManage',
-        component: () => import('@/views/AdminExamManage')
-      },
-      {
-        path: '/adminRoomManage',
-        name: 'AdminRoomManage',
-        component: () => import('@/views/AdminRoomManage')
-      },
-      {
-        path: '/courseQuery',
-        name: 'CourseQuery',
-        component: () => import('@/views/CourseQuery')
-      },
-      {
-        path: '/adminAddAdmin',
-        name: 'AdminAddAdmin',
-        component: () => import('@/views/AdminAddAdmin')
-      },
+        {
+            path: '/adminExamManage',
+            name: 'AdminExamManage',
+            component: () => import('@/views/AdminExamManage')
+        },
+        {
+            path: '/adminRoomManage',
+            name: 'AdminRoomManage',
+            component: () => import('@/views/AdminRoomManage')
+        },
+
+        {
+            path: '/adminAddRoom',
+            name: 'AdminAddRoom',
+            component: () => import('@/views/AdminAddRoom')
+        },
+
+        {
+            path: '/adminRoomHistory',
+            name: 'AdminRoomHistory',
+            component: () => import('@/views/AdminRoomHistory')
+        },
+        {
+            path: '/courseQuery',
+            name: 'CourseQuery',
+            component: () => import('@/views/CourseQuery')
+        },
+        {
+            path: '/adminAddAdmin',
+            name: 'AdminAddAdmin',
+            component: () => import('@/views/AdminAddAdmin')
+        },
       {
         path: '/adminMsgHistory',
         name: 'AdminMsgHistory',
