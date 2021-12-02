@@ -29,6 +29,12 @@ const routes = [
             name: 'AdminAddRoom',
             component: () => import('@/views/AdminAddRoom')
         },
+
+        {
+            path: '/adminRoomHistory',
+            name: 'AdminRoomHistory',
+            component: () => import('@/views/AdminRoomHistory')
+        },
         {
             path: '/courseQuery',
             name: 'CourseQuery',

@@ -9,6 +9,7 @@
       <el-sub-menu index="2" v-if="user.userType == 'admin'">
         <template #title><i class="el-icon-message"></i>机房管理</template>
         <el-menu-item index="/adminRoomManage">机位管理</el-menu-item>
+        <el-menu-item index="/adminRoomHistory">使用记录</el-menu-item>
         <el-menu-item index="/adminAddRoom">新增机房</el-menu-item>
         <el-menu-item index="/adminAddAdmin">管理员设置</el-menu-item>
       </el-sub-menu>
