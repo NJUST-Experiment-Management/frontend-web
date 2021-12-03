@@ -13,6 +13,26 @@ const routes = [
         name: 'Lab',
         component: () => import('@/views/Lab')
       },
+	  {
+	    path: '/myArrangement',
+	    name: 'MyArrangement',
+	    component: () => import('@/views/MyArrangement')
+	  },
+	  {
+	    path: '/openingClass',
+	    name: 'OpeningClass',
+	    component: () => import('@/views/OpeningClass')
+	  },
+	  {
+	    path: '/choose',
+	    name: 'Choose',
+	    component: () => import('@/views/Choose')
+	  },
+	  {
+	    path: '/addtest',
+	    name: 'AddTest',
+	    component: () => import('@/views/AddTest')
+	  },
     ]
   },
   {

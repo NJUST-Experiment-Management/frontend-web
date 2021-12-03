@@ -6,7 +6,7 @@ let Login = {
         "password":"123456",
         "userName":"fishHead",
         "userPhone":"911",
-        "userType":"teacher"
+        "userType":"student"
     }
 }
 
