@@ -44,15 +44,15 @@
   <el-card class="box-card">
     <el-row
         :gutter="20"
-        v-for="itemCol of deviceData"
-        :key="itemCol"
+        v-for="itemRow of deviceData"
+        :key="itemRow"
         :span="5" size="mini"
         :offset=item*2
     >
       <el-card>
         <el-button
             :type="deviceStatusColor(device.deviceStatus)"
-            v-for="device of itemCol "
+            v-for="device of itemRow "
             :key="device"
         >[ {{ device.deviceRow }} , {{ device.deviceCol }} ]
         </el-button>

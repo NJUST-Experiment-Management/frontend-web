@@ -1,14 +1,13 @@
 <template>
   <!--使用记录-->
-  <el-select v-model="labelee" placeholder="请选择机房" @change="selet()">
+  <el-select v-model="labelRoom" placeholder="请选择机房" @change="selectRoom()">
     <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.label">
+        v-for="room in roomsInfo"
+        :key="room.value"
+        :label="room.label"
+        :value="room.label">
     </el-option>
   </el-select>
-
   <el-card class="box-card">
     <el-table
         :data="tableData"
@@ -24,12 +23,29 @@
           label="姓名"
           width="180">
       </el-table-column>
-      <el-table-column
-          prop="address"
-          label="地址">
+      <el-table-column label="操作">
+        <template #default="scope">
+          <el-button
+              size="mini"
+              @click="dialogDeviceVisible = true"
+          >详细查看
+          </el-button>
+          <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除记录
+          </el-button>
+        </template>
       </el-table-column>
     </el-table>
   </el-card>
+  <el-dialog
+      title="机房详细信息"
+      v-model="dialogDeviceVisible"
+  >
+    这里放各个机位使用信息
+  </el-dialog>
+
   <router-view></router-view>
 </template>
 
@@ -38,24 +54,25 @@ export default {
   name: "AdminRoomHistory",
   data() {
     return {
-      options: [{
-        value: '选项1',
-        label: '黄金糕'
+      roomsInfo: [{
+        value: '1001',
+        label: '机房1001'
       }, {
-        value: '选项2',
-        label: '双皮奶'
+        value: '1002',
+        label: '机房1002'
       }, {
-        value: '选项3',
-        label: '蚵仔煎'
+        value: '1003',
+        label: '机房1003'
       }, {
-        value: '选项4',
-        label: '龙须面'
+        value: '1004',
+        label: '机房1004'
       }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        value: '1005',
+        label: '机房1005'
       }],
-      labelee: '',
-
+      labelRoom: '',
+      deviceData: '',
+      dialogDeviceVisible: false,
       tableData: [{
         date: '2016-05-02',
         name: '王小虎',
@@ -75,9 +92,16 @@ export default {
       }]
     }
   },
+
   methods: {
-    selet(e) {
-      console.log(this.labelee)
+    selectRoom(e) {
+      console.log(this.labelRoom)
+    },
+    handleEdit(index, row) {
+      console.log(index, row);
+    },
+    handleDelete(index, row) {
+      console.log(index, row);
     }
   },
   created() {
