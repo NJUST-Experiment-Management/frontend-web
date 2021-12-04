@@ -1,6 +1,6 @@
 <template>
   <!--  设置机房机位状态页面、新增机房？-->
-  <el-select v-model="labelee" placeholder="请选择机房" @change="selet()">
+  <el-select v-model="selectedRoomID" placeholder="请选择机房" @change="selectRoom()">
     <el-option
         v-for="room in rooms"
         :key="room.value"
@@ -41,7 +41,7 @@
 
   </el-card>
 
-  <el-card class="box-card">
+  <el-card class="box-card" v-if="seatsVisible">
     <el-row
         :gutter="20"
         v-for="itemRow of deviceData"
@@ -67,32 +67,10 @@ export default {
   name: "AdminRoomManage",
   data() {
     return {
-
-      rooms: [{
-        value: '1001',
-        label: '机房1001'
-      }, {
-        value: '1002',
-        label: '机房1002'
-      }, {
-        value: '1003',
-        label: '机房1003'
-      }, {
-        value: '1004',
-        label: '机房1004'
-      }, {
-        value: '1005',
-        label: '机房1005'
-      }],
-      labelee: '',
-      roomInfo: {
-        roomID: '1001',
-        roomName: '机房1001',
-        roomKind: '软件',
-        roomRow: 8, //假设8行7列
-        roomCol: 7,
-        roomStatus: '已启用'
-      },
+      seatsVisible: false,
+      rooms: [],
+      selectedRoomID: '',
+      roomInfo: {},
       deviceStatusColor: function (val) {
         if (val == '可用') {
           return 'success'
@@ -106,256 +84,263 @@ export default {
           return 'green'
         }
       },
-      deviceData: [
-        [
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 1,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 2,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 3,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 4,
-            deviceStatus: '禁用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 5,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 6,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 7,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 8,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 1,
-            deviceCol: 9,
-            deviceStatus: '可用'
-          },
-        ],
-        [
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 1,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 2,
-            deviceStatus: '禁用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 3,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 4,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 5,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 6,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 7,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 8,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 2,
-            deviceCol: 9,
-            deviceStatus: '可用'
-          },
-        ],
-        [
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 1,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 2,
-            deviceStatus: '禁用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 3,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 4,
-            deviceStatus: '禁用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 5,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 6,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 7,
-            deviceStatus: '禁用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 3,
-            deviceCol: 8,
-            deviceStatus: '可用'
-          }
-        ],
-        [
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 1,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 2,
-            deviceStatus: '禁用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 3,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 4,
-            deviceStatus: '禁用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 5,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 6,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 7,
-            deviceStatus: '可用'
-          },
-          {
-            roomID: '1001',
-            deviceRow: 4,
-            deviceCol: 8,
-            deviceStatus: '可用'
-          }
-        ],
-      ],
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      deviceData: '',
     }
   },
   methods: {
-    selet(e) {
-      console.log(this.labelee)
+    selectRoom(e) {
+      if (this.selectedRoomID != '' && this.selectedRoomID != null) {
+        //将selectedRoomID传给后端，后端返回该room的信息:roomInfo;和room拥有的所有的device信息:deviceData
+        this.roomInfo = {
+          roomID: '1001',
+          roomName: '机房1001',
+          roomKind: '软件',
+          roomRow: 8, //假设8行7列
+          roomCol: 7,
+          roomStatus: '已启用'
+        }
+        this.deviceData = [
+          [
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 1,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 2,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 3,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 4,
+              deviceStatus: '禁用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 5,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 6,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 7,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 8,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 1,
+              deviceCol: 9,
+              deviceStatus: '可用'
+            },
+          ],
+          [
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 1,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 2,
+              deviceStatus: '禁用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 3,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 4,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 5,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 6,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 7,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 8,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 2,
+              deviceCol: 9,
+              deviceStatus: '可用'
+            },
+          ],
+          [
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 1,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 2,
+              deviceStatus: '禁用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 3,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 4,
+              deviceStatus: '禁用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 5,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 6,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 7,
+              deviceStatus: '禁用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 3,
+              deviceCol: 8,
+              deviceStatus: '可用'
+            }
+          ],
+          [
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 1,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 2,
+              deviceStatus: '禁用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 3,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 4,
+              deviceStatus: '禁用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 5,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 6,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 7,
+              deviceStatus: '可用'
+            },
+            {
+              roomID: '1001',
+              deviceRow: 4,
+              deviceCol: 8,
+              deviceStatus: '可用'
+            }
+          ],
+        ]
+      }
+      this.seatsVisible = true;
+      console.log(this.selectedRoomID)
     }
   },
   created() {
+    //获取后端的所有room的信息
+    this.rooms = [{
+      value: '1001',
+      label: '机房1001'
+    }, {
+      value: '1002',
+      label: '机房1002'
+    }, {
+      value: '1003',
+      label: '机房1003'
+    }, {
+      value: '1004',
+      label: '机房1004'
+    }, {
+      value: '1005',
+      label: '机房1005'
+    }]
   }
 }
 </script>
 
 <style scoped>
-/*.el-card {*/
-/*  min-width: 100%;*/
-/*  height: 100%;*/
-/*  margin-right: 20px;*/
-/*  transition: all .5s;*/
-/*}*/
 .el-dropdown {
   vertical-align: top;
 }
