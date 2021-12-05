@@ -13,6 +13,41 @@ const routes = [
         name: 'Lab',
         component: () => import('@/views/Lab')
       },
+	  {
+	    path: '/addCourse',
+	    name: 'AddCourse',
+	    component: () => import('@/views/AddCourse')
+	  },
+	  {
+	    path: '/addOpeningCourse',
+	    name: 'AddOpeningCourse',
+	    component: () => import('@/views/AddOpeningCourse')
+	  },
+	  {
+	    path: '/adjustCourse',
+	    name: 'AdjustCourse',
+	    component: () => import('@/views/AdjustCourse')
+	  },
+	  {
+	    path: '/addArrange',
+	    name: 'AddArrange',
+	    component: () => import('@/views/AddArrange')
+	  },
+	  {
+	    path: '/deleteArrange',
+	    name: 'DeleteArrange',
+	    component: () => import('@/views/DeleteArrange')
+	  },
+	  {
+	    path: '/setAdmin',
+	    name: 'SetAdmin',
+	    component: () => import('@/views/SetAdmin')
+	  },
+	  {
+	    path: '/setAdmin',
+	    name: 'SetAdmin',
+	    component: () => import('@/views/SetAdmin')
+	  },
     ]
   },
   {

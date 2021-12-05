@@ -1,5 +1,5 @@
 <template>
-  <el-row style="margin-top: 10px">
+  <el-row style="margin-top: 10px;">
     <el-col :span="20"></el-col>
     <el-col :span="4">
       {{user.userName}}
