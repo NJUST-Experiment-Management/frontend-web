@@ -1,26 +1,10 @@
-<template>This is lab
-  <div> This is lab
-
-  </div>
+<template>
+	<h1>lab</h1>
 </template>
 
 <script>
 export default {
   name: "Lab",
-  data() {
-    return {
-      user: {},
-    }
-  },
-  created() {
-    //let userStr = sessionStorage.getItem("user") || "{}"
-    //this.user = JSON.parse(userStr)
-
-    this.load()
-  },
-  methods: {}
-
-
 }
 </script>
 
