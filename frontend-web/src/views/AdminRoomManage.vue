@@ -1,11 +1,7 @@
 <template>
   <!--  设置机房机位状态页面、新增机房？-->
   <el-select v-model="selectedRoomID" placeholder="请选择机房" @change="selectRoom()">
-    <el-option
-        v-for="room in rooms"
-        :key="room.value"
-        :label="room.label"
-        :value="room.label">
+    <el-option v-for="room in rooms" :key="room.value" :label="room.label" :value="room.label">
     </el-option>
   </el-select>
   <el-card class="box-card">
@@ -33,28 +29,17 @@
             <el-button type="danger" size="mini"></el-button>
             禁用中
           </el-row>
-
-
         </div>
       </el-col>
     </el-row>
 
   </el-card>
-
+  <el-empty :image-size="200" v-if="isEmpty()"></el-empty>
   <el-card class="box-card" v-if="seatsVisible">
-    <el-row
-        :gutter="20"
-        v-for="itemRow of deviceData"
-        :key="itemRow"
-        :span="5" size="mini"
-        :offset=item*2
-    >
+    <el-row :gutter="20" v-for="itemRow of deviceData" :key="itemRow" :span="5" size="mini" :offset=item*2>
       <el-card>
-        <el-button
-            :type="deviceStatusColor(device.deviceStatus)"
-            v-for="device of itemRow "
-            :key="device"
-        >[ {{ device.deviceRow }} , {{ device.deviceCol }} ]
+        <el-button :type="deviceStatusColor(device.deviceStatus)" v-for="device of itemRow " :key="device">[
+          {{ device.deviceRow }} , {{ device.deviceCol }} ]
         </el-button>
       </el-card>
     </el-row>
@@ -88,6 +73,13 @@ export default {
     }
   },
   methods: {
+    isEmpty(){
+      if(this.selectedRoomID==""||this.selectedRoomID==null)
+        return true
+      else
+        return false
+    },
+
     selectRoom(e) {
       if (this.selectedRoomID != '' && this.selectedRoomID != null) {
         //将selectedRoomID传给后端，后端返回该room的信息:roomInfo;和room拥有的所有的device信息:deviceData
@@ -100,13 +92,12 @@ export default {
           roomStatus: '已启用'
         }
         this.deviceData = [
-          [
-            {
-              roomID: '1001',
-              deviceRow: 1,
-              deviceCol: 1,
-              deviceStatus: '可用'
-            },
+          [{
+            roomID: '1001',
+            deviceRow: 1,
+            deviceCol: 1,
+            deviceStatus: '可用'
+          },
             {
               roomID: '1001',
               deviceRow: 1,
@@ -156,13 +147,12 @@ export default {
               deviceStatus: '可用'
             },
           ],
-          [
-            {
-              roomID: '1001',
-              deviceRow: 2,
-              deviceCol: 1,
-              deviceStatus: '可用'
-            },
+          [{
+            roomID: '1001',
+            deviceRow: 2,
+            deviceCol: 1,
+            deviceStatus: '可用'
+          },
             {
               roomID: '1001',
               deviceRow: 2,
@@ -212,13 +202,12 @@ export default {
               deviceStatus: '可用'
             },
           ],
-          [
-            {
-              roomID: '1001',
-              deviceRow: 3,
-              deviceCol: 1,
-              deviceStatus: '可用'
-            },
+          [{
+            roomID: '1001',
+            deviceRow: 3,
+            deviceCol: 1,
+            deviceStatus: '可用'
+          },
             {
               roomID: '1001',
               deviceRow: 3,
@@ -262,13 +251,12 @@ export default {
               deviceStatus: '可用'
             }
           ],
-          [
-            {
-              roomID: '1001',
-              deviceRow: 4,
-              deviceCol: 1,
-              deviceStatus: '可用'
-            },
+          [{
+            roomID: '1001',
+            deviceRow: 4,
+            deviceCol: 1,
+            deviceStatus: '可用'
+          },
             {
               roomID: '1001',
               deviceRow: 4,
