@@ -1,10 +1,10 @@
 <template>
 	<!-- 老师调课页面 -->
 	<el-row>
-		<el-col :span="16" :offset="4">
-			<el-form ref="form" style="padding: 0 5%  0  5% ;margin-top: 10px;">
+		<el-col :span="22" :offset="1">
+			<el-form ref="form" style="padding: 0 5%  0  5% ;margin-top: 5px;">
 				<el-form-item>
-					<div style="text-align: center;font-size: 1.8rem;">
+					<div style="text-align: center;font-size: 1.5rem;">
 						调整实验
 					</div>
 				</el-form-item>
@@ -147,4 +147,18 @@
 </script>
 
 <style>
+.el-table__body-wrapper::-webkit-scrollbar{
+  /*width: 0;宽度为0隐藏*/
+  width: 2px;
+}
+.el-table__body-wrapper::-webkit-scrollbar-thumb{
+  border-radius: 2px;
+  height: 50px;
+  background: #7251B5;
+}
+.el-table__body-wrapper::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 5px #d1dbe5;
+  border-radius: 2px;
+  background: #a6a9ad;
+}
 </style>

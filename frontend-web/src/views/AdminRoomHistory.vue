@@ -1,4 +1,5 @@
 <template>
+<!--  <el-scrollbar>-->
   <!--使用记录-->
   <el-select v-model="selectedRoomID" placeholder="请选择机房" @change="selectRoom()">
     <el-option v-for="room in roomsInfo" :key="room.value" :label="room.label" :value="room.label">
@@ -63,6 +64,7 @@
   </el-dialog>
 
   <router-view></router-view>
+<!--  </el-scrollbar>-->
 </template>
 
 <script>
@@ -140,5 +142,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
