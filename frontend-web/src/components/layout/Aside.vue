@@ -1,7 +1,20 @@
 <template>
 	<el-aside width="200px">
 		<el-menu :default-openeds="['1']" style="height: calc(100vh - 80px);" :default-active="path" router>
+      <el-card style="margin-bottom:5px;">
+<!--        <div style="text-align: center; margin-bottom: 5px">-->
+<!--          <span >Welcome !</span>-->
+<!--        </div>-->
+        <div class="aside-information">
 
+          <el-tag style="display: block; margin-bottom: 5px"><i class="el-icon-user"></i>姓  名&nbsp;{{user.userName}}</el-tag>
+          <el-tag style="display: block;"><i class="el-icon-view"></i>学工号&nbsp;{{user.userId}}</el-tag>
+<!--          <el-badge :value=messages class="item">-->
+<!--            <el-button size="small">消息</el-button>-->
+<!--          </el-badge>-->
+        </div>
+      </el-card>
+<!--      -->
 			<el-sub-menu index="1">
 				<template #title><i class="el-icon-s-grid"></i>&nbsp;机 房 课 表</template>
 				<el-menu-item index="/courseQuery"><i class="el-icon-search"></i>排 课 查 询</el-menu-item>
@@ -31,9 +44,9 @@
 			</el-sub-menu>
 			
 			<el-sub-menu index="2" v-if="user.userType == 'student'">
-				<template #title><i class="el-icon-setting"></i>我的课程</template>
-				<el-menu-item index="/StudentCourseArrangement">查看课程安排</el-menu-item>
-				<el-menu-item index="/StudentOpeningClass">开放性实验</el-menu-item>
+				<template #title><i class="el-icon-setting"></i>&nbsp;我 的 课 程</template>
+				<el-menu-item index="/StudentCourseArrangement"><i class="el-icon-s-order"></i>查看课程安排</el-menu-item>
+				<el-menu-item index="/StudentOpeningClass"><i class="el-icon-zoom-in"></i>选择开放性实验</el-menu-item>
 
 			</el-sub-menu>
 
@@ -56,26 +69,34 @@
 		name: "Aside",
 		data() {
 			return {
-				user: ''
+				user:{},
+        messages: 0,
 			}
 		},
 		created() {
-			let userStr = sessionStorage.getItem("user")
-			this.user = JSON.parse(userStr)
+      this.user = JSON.parse(sessionStorage.getItem("user"));
+      this.getMessageNum()
 		},
 		methods: {
-
+      getMessageNum(){
+        request.get("/getMessageNum").then( res => {
+          this.messages = res.data
+        })
+      }
 		},
 	}
 </script>
 
 
 <style scoped>
+
 	.el-aside {
 		color: var(--el-text-color-primary);
 	}
   .el-aside::-webkit-scrollbar {
     display: none;
   }
+
+
 
 </style>
