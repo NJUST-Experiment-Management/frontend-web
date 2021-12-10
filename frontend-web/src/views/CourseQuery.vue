@@ -8,10 +8,6 @@
 		</el-option>
 	</el-select>
   <el-empty :image-size="300" v-if="isEmpty()"></el-empty>
-	<!-- 	<el-select v-model="roomid" placeholder="请选择机房" @change="change" clearable>
-		<el-option v-for="item in options" :key="item.roomid" :label="item.roomid" :value="item.roomid">
-		</el-option>
-	</el-select> -->
 	<el-table :data="options" height="580" style="width: 100%" v-if="visible" v-loading="loading">
 		<el-table-column prop="roomid" label="机房" width="180" />
 		<el-table-column prop="status" label="状态" width="180" />

@@ -1,5 +1,5 @@
 <template>
-	<h1>lab</h1>
+	<h1>welcome  lab</h1>
 </template>
 
 <script>

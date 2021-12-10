@@ -6,7 +6,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 // import 'mockjs'
 import './mock/index'
-
+import "./assets/style/theme/index.css";
 eval(process.env.VUE_APP_MOCK) && require('@/mock');
 
 createApp(App)
