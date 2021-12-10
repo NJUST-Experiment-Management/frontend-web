@@ -15,9 +15,10 @@
 <!--    <el-col :span="4"><div style="margin-top: 10px; padding-left: 30px; font-weight: bold; color:#4a389b;font-size: 25px">NJUST-实验室机房排课系统</div></el-col>-->
     <el-col :span="3" style="margin-top: 25px">
         <el-badge :value=messages class="item">
-          <el-button size="small">消息</el-button>
+          <el-button size="mini">消息</el-button>
         </el-badge>
-      <el-button type="danger" size="mini" style="margin-left: 10px">退出</el-button>
+<!--      <el-button type="danger" size="mini" style="margin-left: 10px">退出</el-button>-->
+      <el-button style="margin-left: 10px" type="danger" size="mini" @click="$router.push('/login')">退出</el-button>
 
 
     </el-col>
