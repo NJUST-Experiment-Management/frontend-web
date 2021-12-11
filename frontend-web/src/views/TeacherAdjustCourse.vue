@@ -12,10 +12,21 @@
 					<el-table height="450" :data="courses" style="width: 100%;">
 						<el-table-column prop="courseName" label="课程名称" width="200px"/>
 						<el-table-column prop="courseId" label="课程ID" />
-						<el-table-column prop="createTime" label="创建时间" width="200px"/>
+            <el-table-column prop="createTime" label="创建时间" width="200px">
+              <template v-slot="scope">
+                <i class="el-icon-time"></i>
+                <span style="margin-left: 10px">{{ scope.row.createTime}}</span>
+              </template>
+
+            </el-table-column>
 						<el-table-column label="实验类型" width="150px">
 							　<template v-slot="scope">
-								<span>{{scope.row.isOpening===true?'开放性实验':'课程实验'}}</span>
+              <el-button
+                  :type="btnColor(scope.row.isOpening)"
+                  size="mini"
+                  round
+              >{{scope.row.isOpening===true?'开放实验':'课程实验' }}</el-button>
+
 							</template>
 						</el-table-column>
 						<el-table-column align="center" label="操作">
@@ -51,9 +62,15 @@
 		data() {
 			return {
 				courses: [],
+        btnColor: function(val){
+          if(val===false)
+            return 'primary';
+        },
 			}
 		},
 		methods: {
+
+
 			addArrange(id, ct) {
 				sessionStorage.setItem("addCourseId", id)
 				sessionStorage.setItem("courseTotal", ct)

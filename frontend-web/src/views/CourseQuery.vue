@@ -8,6 +8,7 @@
 		</el-option>
 	</el-select>
   <el-empty :image-size="300" v-if="isEmpty()"></el-empty>
+
 	<el-table :data="options" height="580" style="width: 100%" v-if="visible" v-loading="loading">
 		<el-table-column prop="roomid" label="机房" width="180" />
 		<el-table-column prop="status" label="状态" width="180" />

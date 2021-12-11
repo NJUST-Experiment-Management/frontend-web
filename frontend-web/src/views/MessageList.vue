@@ -1,14 +1,20 @@
 <template>
-	<el-table :data="msgList" stripe border style="width: 80%; margin: 0 auto;" v-loading="loading" height="600">
-		<el-table-column prop="time" label="消息时间" sortable />
-		<el-table-column prop="content" :show-overflow-tooltip='true'  label="消息内容" />
-		<el-table-column prop="isread" label="状态" >
+	<el-table
+      :data="msgList"
+      stripe
+      border
+      style="width: 100%; margin: 0 auto;" v-loading="loading" height="450"
+
+  >
+		<el-table-column prop="time" label="消息时间" sortable width="130px"/>
+		<el-table-column prop="content" :show-overflow-tooltip='true'  label="消息内容" align="center" />
+		<el-table-column prop="isread" label="状态" align="center" width="80px">
 						<template v-slot="scope">
-							<div v-if="scope.row.isread=== '1'" style="margin-top: 10px;"><el-tag  type="success">已读</el-tag></div>
-							<div v-if="scope.row.isread=== '0'" style="margin-top: 10px;"><el-tag  type="danger">未读</el-tag></div>
-		　　　　　　　　</template>
+							<el-tag  type="success" v-if="scope.row.isread=== '1'" style="margin-top: 0px;">已读</el-tag>
+							<el-tag type="danger" v-if="scope.row.isread=== '0'" style="margin-top: 0px;">未读</el-tag>
+		　　　　　</template>
 		</el-table-column>
-		<el-table-column label="查看">
+		<el-table-column label="查看" align="center" width="100px">
 		      <template #default="scope">
 		        <el-button size="mini" @click="readMsg(scope.$index, scope.row)"
 		          >查看</el-button
@@ -58,12 +64,27 @@
 				          })
 				        },
 				      })
-			}
-		}
+			},
+
+  }
 
 	}
 </script>
 
 <style>
+.el-table__body-wrapper::-webkit-scrollbar{
+  /*width: 0;宽度为0隐藏*/
+  width: 2px;
+}
+.el-table__body-wrapper::-webkit-scrollbar-thumb{
+  border-radius: 2px;
+  height: 50px;
+  background: #7251B5;
+}
+.el-table__body-wrapper::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 5px #d1dbe5;
+  border-radius: 2px;
+  background: #a6a9ad;
+}
 
 </style>

@@ -6,19 +6,19 @@
   <!-- </el-row>-->
   <el-row style="margin-top: 1px ;">
     <el-col :span="4"></el-col>
-    <el-col :span="17"> <img :src = "logoUrl_3" height="55" style="margin-top: 0px;"/>
+    <el-col :span="16"> <img :src = "logoUrl_3" height="55" style="margin-top: 0px;"/>
     </el-col>
     <!--    <el-col :span="1.5"> <img :src = "logoUrl_1" height="55" width="75" style="margin-top: 0px;"/>-->
     <!--    </el-col>-->
     <!--    <el-col :span="2"> <img :src = "logoUrl_2" height="55" width="75" style="margin-top: 0px;"/>-->
     <!--    </el-col>-->
     <!--    <el-col :span="4"><div style="margin-top: 10px; padding-left: 30px; font-weight: bold; color:#4a389b;font-size: 25px">NJUST-实验室机房排课系统</div></el-col>-->
-    <el-col :span="3" style="margin-top: 10px">
+    <el-col :span="4" style="margin-top: 10px">
       <el-badge :value=messages class="item" v-if="messages!=0">
         <el-button size="small" @click="messageList">消息</el-button>
       </el-badge>
-      <el-button size="small" @click="messageList" v-if="messages==0">消息</el-button>
-      <el-button type="danger" size="mini" style="margin-left: 10px" @click="exit">退出</el-button>
+      <el-button size="mini" @click="messageList" v-if="messages==0"><i class="el-icon-message"> </i>&nbsp;消 息</el-button>
+      <el-button type="danger" size="mini" style="margin-left: 10px" @click="exit"><i class="el-icon-switch-button"> </i>&nbsp;退 出</el-button>
 
 
     </el-col>
