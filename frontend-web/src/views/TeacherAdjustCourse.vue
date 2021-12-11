@@ -1,5 +1,6 @@
 <template>
 	<!-- 老师调课页面 -->
+  <div class="adjustPage">
 	<el-row>
 		<el-col :span="22" :offset="1">
 			<el-form ref="form" style="padding: 0 0%  0  0% ;margin-top: 5px;background-color: #6a5ba8">
@@ -9,7 +10,7 @@
 					</div>
 				</el-form-item>
 				<el-form-item >
-					<el-table height="450" :data="courses" style="width: 100%;">
+					<el-table height="450" :data="courses" style="width: 100%; ">
 						<el-table-column prop="courseName" label="课程名称" width="200px"/>
 						<el-table-column prop="courseId" label="课程ID" />
             <el-table-column prop="createTime" label="创建时间" width="200px">
@@ -54,6 +55,7 @@
 			</el-form>
 		</el-col>
 	</el-row>
+  </div>
 </template>
 
 <script>
@@ -178,5 +180,13 @@
   box-shadow: inset 0 0 5px #d1dbe5;
   border-radius: 2px;
   background: #a6a9ad;
+}
+.adjustPage{
+  /*background-image: url("../assets/img/b5.jpg");*/
+  /*background-color: #b5adda;*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 </style>

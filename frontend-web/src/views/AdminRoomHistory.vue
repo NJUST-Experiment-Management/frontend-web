@@ -29,7 +29,7 @@
     </el-table>
   </el-card>
 
-  <el-dialog title="机房详细信息" v-model="dialogRoomVisible">
+  <el-dialog title="点击机位查看详细信息" v-model="dialogRoomVisible">
     <!--		这里放各个机位使用信息-->
     <el-row justify="center">
       <el-card>

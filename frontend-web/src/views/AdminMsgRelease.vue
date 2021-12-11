@@ -1,6 +1,8 @@
 <template>
   <!-- 老师添加开放性实验页面 -->
-  <el-row>
+  <div class="msgBG">
+    <el-card style="width: 80%;display: block;margin-left: 10%;opacity:0.8;" >
+  <el-row >
     <el-col :span="16" :offset="4">
       <el-form :model="msgForm" ref="msgForm" :rules="rules" style="padding: 0 5%  0  5% ;margin-top: 10px;">
         <el-form-item>
@@ -46,10 +48,14 @@
       </el-form>
     </el-col>
   </el-row>
+    </el-card>
+  </div>
+
 </template>
 
 <script>
 export default {
+  img1: require("../assets/img/bg2small.jpg"),
   name: "AdminMsgRelease",
   data() {
     return {
@@ -111,4 +117,12 @@ export default {
 </script>
 
 <style>
+.msgBG{
+  background-image: url("../assets/img/b4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
 </style>
