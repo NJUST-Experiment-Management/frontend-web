@@ -6,19 +6,19 @@
     </el-option>
   </el-select>
   <el-card class="box-card">
-    <el-table :data="historyData" border style="width: 100%">
-      <el-table-column prop="arrange_date" label="日期" width="180">
+    <el-table :data="historyData"  style="width: 100%">
+      <el-table-column prop="arrange_date" label="日期" width="180"  align="center">
         <template v-slot="scope">
           <i class="el-icon-time"></i>
           <span style="margin-left: 10px">{{ scope.row.arrange_date}}</span>
         </template>
 
       </el-table-column>
-      <el-table-column prop="arrange_time" label="大节" width="180">
+      <el-table-column prop="arrange_time" label="大节" width="180" align="center">
       </el-table-column>
-      <el-table-column prop="course_name" label="课程名" width="180">
+      <el-table-column prop="course_name" label="课程名" width="180"  align="center">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作"  align="center">
         <template #default="scope">
           <el-button size="mini" @click="dialogRoomVisible = true">详细查看
           </el-button>
@@ -38,9 +38,9 @@
             <el-button
                 v-for="itemCol of selectedRoomInfo.room_col "
                 :key="itemCol"
-                type="success"
+                type="primary"
                 @click="dialogDeviceVisible=true"
-            >
+            ><i class="el-icon-monitor"></i>
             </el-button>
           </el-card>
         </el-row>
@@ -53,7 +53,7 @@
         <el-button type="primary" @click="dialogRoomVisible = false">确 定</el-button>
       </div>
     </el-row>
-    <el-dialog title="设备使用记录" v-model="dialogDeviceVisible" width="40%" center>
+    <el-dialog title="设备使用记录" v-model="dialogDeviceVisible" width="60%" center>
       <el-descriptions :column="1">
         <el-descriptions-item label="用户姓名">
           <el-tag type="success" >{{ this.detailed_date_test.user_name }}</el-tag>
@@ -117,7 +117,7 @@ export default {
           roomID: this.selectedRoomID,
           room_name: '机房1001',
           room_kind: '软件',
-          room_row: 8, //假设8行7列
+          room_row: 6, //假设8行7列
           room_col: 7,
           room_status: '已启用'
         }
