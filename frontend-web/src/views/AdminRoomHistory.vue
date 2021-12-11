@@ -8,6 +8,11 @@
   <el-card class="box-card">
     <el-table :data="historyData" border style="width: 100%">
       <el-table-column prop="arrange_date" label="日期" width="180">
+        <template v-slot="scope">
+          <i class="el-icon-time"></i>
+          <span style="margin-left: 10px">{{ scope.row.arrange_date}}</span>
+        </template>
+
       </el-table-column>
       <el-table-column prop="arrange_time" label="大节" width="180">
       </el-table-column>
