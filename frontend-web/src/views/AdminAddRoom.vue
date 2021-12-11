@@ -13,16 +13,25 @@
 					</el-input>
 				</el-form-item>
 
-				<el-form-item label="机房行数:" required>
+				<el-form-item label="机房行列:" required>
 					<div style="display: flex; flex-direction: row;">
 						<el-form-item prop="roomRow">
 							<el-input v-model.number="roomForm.roomRow" placeholder="请输入行数" @change="checkRow()">
 							</el-input>
 						</el-form-item>
 						<el-form-item prop="roomCol">
-							<el-input v-model.number="roomForm.roomCol" placeholder="请输入列数" @change="checkCol()">
-							</el-input>
+<!--							<el-input v-model.number="roomForm.roomCol" placeholder="请输入列数" @change="checkCol()">-->
+<!--							</el-input>-->
+              <el-select v-model="roomForm.roomCol" placeholder="请输入列数" @change="checkCol()">
+                <el-option
+                    v-for="item in columnData"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+              </el-select>
 						</el-form-item>
+
 					</div>
 				</el-form-item>
 
@@ -74,6 +83,29 @@
 		name: "AdminAddRoom",
 		data() {
 			return {
+        columnData:[
+          {
+            label:6,
+            value:6,
+          },
+          {
+            label:7,
+            value:7,
+          },
+          {
+            label: 8,
+            value: 8,
+          },
+          {
+            label: 9,
+            value: 9,
+          },
+          {
+            label: 10,
+            value: 10,
+          }
+
+        ],
 				dialogAddVisible: false,
 				rules: {
 					roomName: [{
