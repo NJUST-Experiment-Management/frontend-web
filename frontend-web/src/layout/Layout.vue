@@ -21,7 +21,8 @@ export default {
     Header,
     Aside
   },
-  name: "Layout"
+  name: "Layout",
+
 }
 </script>
 

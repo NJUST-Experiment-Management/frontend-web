@@ -1,5 +1,7 @@
 <template>
 	<!-- 新增机房页面 -->
+  <div class="roomBG">
+    <el-card style="width: 80%;display: block;margin-left: 10%;opacity:0.8;">
 	<el-row>
 		<el-col :span="16" :offset="4">
 			<el-form :model="roomForm" ref="roomForm" :rules="rules" style="padding: 0 5%  0  5% ;margin-top: 10px;">
@@ -54,6 +56,8 @@
 			</el-form>
 		</el-col>
 	</el-row>
+    </el-card>
+  </div>
 	<el-dialog title="机位图预览" v-model="dialogAddVisible" center>
 		<el-row justify="center">
 			<el-card>
@@ -175,4 +179,11 @@
 </script>
 
 <style>
+.roomBG{
+  background-image: url("../assets/img/b5.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
 </style>
