@@ -20,6 +20,11 @@ const routes = [
                 name: 'CourseQuery',
                 component: () => import('@/views/CourseQuery')
             },
+            {
+                path: '/messageList',
+                name: 'MessageList',
+                component: () => import('@/views/MessageList')
+            },
 
             // 管理员路由
             {

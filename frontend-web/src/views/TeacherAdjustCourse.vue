@@ -2,36 +2,37 @@
 	<!-- 老师调课页面 -->
 	<el-row>
 		<el-col :span="22" :offset="1">
-			<el-form ref="form" style="padding: 0 5%  0  5% ;margin-top: 5px;">
+			<el-form ref="form" style="padding: 0 0%  0  0% ;margin-top: 5px;background-color: #6a5ba8">
 				<el-form-item>
 					<div style="text-align: center;font-size: 1.5rem;">
 						调整实验
 					</div>
 				</el-form-item>
 				<el-form-item>
-					<el-table height="500" :data="courses" style="width: 100%">
-						<el-table-column prop="courseName" label="课程名称" />
+					<el-table height="450" :data="courses" style="width: 100%;">
+						<el-table-column prop="courseName" label="课程名称" width="200px"/>
 						<el-table-column prop="courseId" label="课程ID" />
-						<el-table-column prop="createTime" label="创建时间" />
-						<el-table-column label="实验类型">
+						<el-table-column prop="createTime" label="创建时间" width="200px"/>
+						<el-table-column label="实验类型" width="150px">
 							　<template v-slot="scope">
 								<span>{{scope.row.isOpening===true?'开放性实验':'课程实验'}}</span>
 							</template>
 						</el-table-column>
 						<el-table-column align="center" label="操作">
 							<template v-slot="scope">
-								<div style="display: flex;flex-direction: column;align-items: center;">
+<!--                flex-direction: column;-->
+								<div style="display: flex;align-items: center;">
 									<el-button type="text" style="display: none;" :disabled="true" size="mini">
 									</el-button>
-									<el-button type="text" :disabled="scope.row.isOpening?true:false" size="small"
+									<el-button type="text" :disabled="scope.row.isOpening?true:false" size="mini"
 										@click="addArrange(scope.row.courseId,scope.row.total)">
 										添加安排
 									</el-button>
-									<el-button type="text" :disabled="scope.row.isOpening?true:false" size="small"
+									<el-button type="text" :disabled="scope.row.isOpening?true:false" size="mini"
 										@click="deleteArrange(scope.row.courseId)">
 										删除安排
 									</el-button>
-									<el-button type="text" size="small" @click="deleteCourse(scope.row.courseId)">
+									<el-button type="text" size="mini" @click="deleteCourse(scope.row.courseId)">
 										删除课程
 									</el-button>
 								</div>
