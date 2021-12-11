@@ -3,12 +3,12 @@
 	<el-row>
 		<el-col :span="22" :offset="1">
 			<el-form ref="form" style="padding: 0 0%  0  0% ;margin-top: 5px;background-color: #6a5ba8">
-				<el-form-item>
-					<div style="text-align: center;font-size: 1.5rem;">
-						调整实验
+				<el-form-item style="height: 22px;">
+					<div style="text-align: center;font-size: 1.1rem;margin-top: 3px;color: #d1dbe5">
+						调 整 实 验
 					</div>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item >
 					<el-table height="450" :data="courses" style="width: 100%;">
 						<el-table-column prop="courseName" label="课程名称" width="200px"/>
 						<el-table-column prop="courseId" label="课程ID" />
