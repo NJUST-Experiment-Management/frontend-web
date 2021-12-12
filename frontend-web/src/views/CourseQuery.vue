@@ -19,6 +19,7 @@
 	import {
 		ref
 	} from 'vue'
+  import request from "@/utils/request";
 	export default {
 		name: "CourseQuery",
 		data() {
@@ -61,17 +62,16 @@
 		methods: {
 			load() {
 				//发送请求，返回所有机房
-				// request.get('/Allrooms').then(res => {
-				// 	if (res.code === '0') {
-				// this.options=ref(res.roomlist)
-				// 	} else {
-				// 		this.$message({
-				// 			type: "error",
-				// 			message: res.msg
-				// 		})
-				// 	}
-				// })
-				// this.options = ref([{roomid:'1002',status:0}, {roomid:'1003',status:1}, {roomid:'1004',status:0}, {roomid:'1005',status:0}, {roomid:'1001',status:0}])
+				request.get('/room/all').then(res => {
+					if (res.code === '0') {
+				this.options=ref(res.roomlist)
+					} else {
+						this.$message({
+							type: "error",
+							message: res.msg
+						})
+					}
+				})
 				let arr = [{
 					roomid: '1002',
 					status: 0
@@ -91,7 +91,7 @@
 				let newArr = arr.map(val => {
 					let json = {};
 					json.roomid = val.roomid
-					json.status = val.status == 1 ? '禁用' : '空闲'
+					json.status = val.status === 1 ? '禁用' : '空闲'
 					json.course = '无'
 					return json;
 				});
@@ -99,46 +99,13 @@
 			},
 			change() {
 				console.log(this.roomid, this.coursedate, this.coursetime)
-				if (this.coursedate != '' && this.coursetime != '' && this.coursedate != null && this.coursetime != null) {
+				if (this.coursedate !== '' && this.coursetime !== '' && this.coursedate != null && this.coursetime != null) {
 					this.visible = true
 					this.loading = true
 					this.load()
-					// request.get('/', {
-					// 		params: {
-					// 			roomid: this.roomid,
-					// 			coursedate: this.coursedate,
-					// 			coursetime: this.coursetime
-					// 		},
-					// 	})
-					// 	.then(res => {
-					// 		if (res.code === '0') {
-
-					// 		} else {
-					// 			this.$message({
-					// 				type: "error",
-					// 				message: res.msg
-					// 			})
-					// 		}
-					// 	})
-					var res = [{
-						roomid: '1001',
-						course: ['计算机组成原理']
-					}, {
-						roomid: '1002',
-						course: ['计算机逻辑基础']
-					}, {
-						roomid: '1003',
-						course: ['计算机逻辑基础', '模电实验']
-					}, {
-						roomid: '1004',
-						course: []
-					}, {
-						roomid: '1005',
-						course: ['计算机组成原理']
-					}]
 					for (let i = 0; i < this.options.length; i++) {
-						if (this.options[i].status != '禁用') {
-							if (res[i].course.length != 0) {
+						if (this.options[i].status !== '禁用') {
+							if (res[i].course.length !== 0) {
 								this.options[i].course = ''
 								for (let j = 0; j < res[i].course.length; j++)
 									this.options[i].course += res[i].course[j] + ' '
@@ -154,7 +121,7 @@
 
 			},
       isEmpty(){
-        if(this.coursetime==""||this.coursetime==null||this.coursedate==""||this.coursedate==null)
+        if(this.coursetime===""||this.coursetime==null||this.coursedate===""||this.coursedate==null)
           return true
         else
           return false

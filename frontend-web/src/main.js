@@ -4,8 +4,7 @@ import router from './router'
 import store from './store'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-// import 'mockjs'
-import './mock/index'
+
 import "./assets/style/theme/index.css";
 import 'element-plus/dist/index.css'
 import '@/assets/css/global.css'

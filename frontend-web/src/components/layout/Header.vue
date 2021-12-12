@@ -17,7 +17,7 @@
         <el-badge :value=messages class="item">
           <el-button size="small">消息</el-button>
         </el-badge>
-      <el-button type="danger" size="mini" style="margin-left: 10px">退出</el-button>
+      <el-button type="danger" size="mini" style="margin-left: 10px" @click="logout">退出</el-button>
 
 
     </el-col>
@@ -49,6 +49,10 @@ export default {
       request.get("/getMessageNum").then( res => {
         this.messages = res.data
       })
+    },
+    logout(){
+      sessionStorage.setItem("user",null)
+      this.$router.push("/login")
     }
   }
 }
