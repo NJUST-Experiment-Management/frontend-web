@@ -5,13 +5,14 @@
 	<el-row>
 		<el-col :span="23" :offset="0">
 			<el-form ref="form" style="padding: 0 5%  0  5% ;margin-top: 0px;">
-<!--				<el-form-item>-->
-					<div style="text-align: center; font-size: 1.0rem;">
-            课程ID&nbsp;<i class="el-icon-caret-right"></i><el-button type="primary" size="mini">{{courseId}}</el-button>
-					</div>
-<!--				</el-form-item>-->
+				<!--				<el-form-item>-->
+				<div style="text-align: center; font-size: 1.0rem;">
+					课程ID&nbsp;<i class="el-icon-caret-right"></i>
+					<el-button type="primary" size="mini">{{courseId}}</el-button>
+				</div>
+				<!--				</el-form-item>-->
 				<el-form-item>
-					<el-table height="400"  :data="arranges" style="width: 100%"
+					<el-table height="400" :data="arranges" style="width: 100%"
 						@selection-change="handleArrangeSelectionChange">
 						<el-table-column type="selection" />
 						<el-table-column prop="arrangeId" label="编排编号" />
@@ -36,6 +37,7 @@
 </template>
 
 <script>
+	import request from "@/utils/request";
 	export default {
 		name: "TeacherDeleteArrange",
 		data() {
@@ -76,121 +78,121 @@
 		  }) */
 			}
 		},
-		mounted() {
-			this.courseId = sessionStorage.getItem("deleteCourseId");
-			console.log(this.courseId);
-			let fd = {}
-			fd.courseId = this.courseId;
-			this.arranges = [{
-					arrangeId: '3333',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: false,
-					roomId: '1002'
-				},
-				{
-					arrangeId: '3334',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: true,
-					roomId: '1001',
-				},
-				{
-					arrangeId: '3333',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: false,
-					roomId: '1002'
-				},
-				{
-					arrangeId: '3334',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: true,
-					roomId: '1001',
-				},
-				{
-					arrangeId: '3333',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: false,
-					roomId: '1002'
-				},
-				{
-					arrangeId: '3334',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: true,
-					roomId: '1001',
-				},
-				{
-					arrangeId: '3333',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: false,
-					roomId: '1002'
-				},
-				{
-					arrangeId: '3334',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: true,
-					roomId: '1001',
-				},
-				{
-					arrangeId: '3333',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: false,
-					roomId: '1002'
-				},
-				{
-					arrangeId: '3334',
-					courseWeek: 1,
-					courseTime: 2,
-					courseDay: 2,
-					isShared: true,
-					roomId: '1001',
-				},
-			];
-			/* request.post("/courseArrange",fd ).then(res => {
+		created() {
+			this.courseId = sessionStorage.getItem("deleteCourseId");	
+			request.get("/arrangement/user").then(res => {
 			  console.log(res)
-			  if (res.code === '0') {
-				  this.arranges = res.arranges;
-				})
-				} else {
-				  this.$message({
-				    type: "error",
-					message: res.msg
-				  })
-				}
-			}) */
+			 //  if (res.code === '0') {
+				//   this.arranges = res.arranges;
+				// })
+				// } else {
+				//   this.$message({
+				//     type: "error",
+				// 	message: res.msg
+				//   })
+				// }
+			})
+			// this.arranges = [{
+			// 		arrangeId: '3333',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: false,
+			// 		roomId: '1002'
+			// 	},
+			// 	{
+			// 		arrangeId: '3334',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: true,
+			// 		roomId: '1001',
+			// 	},
+			// 	{
+			// 		arrangeId: '3333',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: false,
+			// 		roomId: '1002'
+			// 	},
+			// 	{
+			// 		arrangeId: '3334',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: true,
+			// 		roomId: '1001',
+			// 	},
+			// 	{
+			// 		arrangeId: '3333',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: false,
+			// 		roomId: '1002'
+			// 	},
+			// 	{
+			// 		arrangeId: '3334',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: true,
+			// 		roomId: '1001',
+			// 	},
+			// 	{
+			// 		arrangeId: '3333',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: false,
+			// 		roomId: '1002'
+			// 	},
+			// 	{
+			// 		arrangeId: '3334',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: true,
+			// 		roomId: '1001',
+			// 	},
+			// 	{
+			// 		arrangeId: '3333',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: false,
+			// 		roomId: '1002'
+			// 	},
+			// 	{
+			// 		arrangeId: '3334',
+			// 		courseWeek: 1,
+			// 		courseTime: 2,
+			// 		courseDay: 2,
+			// 		isShared: true,
+			// 		roomId: '1001',
+			// 	},
+			// ];
+			
 		}
 	}
 </script>
 
 <style>
-.el-table__body-wrapper::-webkit-scrollbar{
-  /*width: 0;宽度为0隐藏*/
-  width: 2px;
-}
-.el-table__body-wrapper::-webkit-scrollbar-thumb{
-  border-radius: 2px;
-  height: 50px;
-  background: #7251B5;
-}
-.el-table__body-wrapper::-webkit-scrollbar-track{
-  box-shadow: inset 0 0 5px #d1dbe5;
-  border-radius: 2px;
-  background: #a6a9ad;
-}
+	.el-table__body-wrapper::-webkit-scrollbar {
+		/*width: 0;宽度为0隐藏*/
+		width: 2px;
+	}
+
+	.el-table__body-wrapper::-webkit-scrollbar-thumb {
+		border-radius: 2px;
+		height: 50px;
+		background: #7251B5;
+	}
+
+	.el-table__body-wrapper::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 5px #d1dbe5;
+		border-radius: 2px;
+		background: #a6a9ad;
+	}
 </style>

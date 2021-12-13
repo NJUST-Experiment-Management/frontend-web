@@ -42,7 +42,7 @@
       <el-sub-menu index="5" v-if="user.userType == 'ADMIN'">
         <template #title><i class="el-icon-s-order"></i>&nbsp;系 统 消 息</template>
         <el-menu-item index="/adminMsgRelease" ><i class="el-icon-position"></i>消 息 发 布</el-menu-item>
-        <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item>
+        <!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
       </el-sub-menu>
 
       <el-sub-menu index="2" v-if="user.userType == 'STUDENT'">

@@ -73,7 +73,7 @@
 		<el-row justify="center">
 			<div slot="footer" class="dialog-footer">
 				<el-button @click="dialogAddVisible = false">取 消</el-button>
-				<el-button type="primary" @click="dialogAddVisible = false">确 定</el-button>
+				<el-button type="primary" @click="addroom">确 定</el-button>
 			</div>
 		</el-row>
 	</el-dialog>
@@ -155,6 +155,24 @@
 				// this.$refs.upload.submit()
 				console.log("submit success");
 				// this.dialogAddVisible = true
+			},
+			addroom(){
+				console.log(this.roomForm)
+				request.post('/room/add', this.roomForm).then(res => {
+					console.log(res)
+					if (res.code === '0') {
+						this.$message({
+							type: "success",
+							message: "新建成功"
+						})
+						this.$router.push('/adminAddRoom')
+					} else {
+						this.$message({
+							type: "error",
+							message: res.msg
+						})
+					}
+				})
 			},
 			resetForm(formName) {
 				this.$refs[formName].resetFields();
