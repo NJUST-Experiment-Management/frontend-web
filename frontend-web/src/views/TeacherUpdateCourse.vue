@@ -1,11 +1,13 @@
 <template>
-	<!-- 老师添加开放性实验页面 -->
+	<!-- 老师修改课程实验信息页面 -->
+	<el-button @click="prePage()" style="background-color: unset;border: 0px;color:dodgerblue" type="primary">返回
+	</el-button>
 	<el-row>
 		<el-col :span="16" :offset="4">
 			<el-form :model="form" ref="form" :rules="rules" style="padding: 0 5%  0  5% ;margin-top: 10px;">
 				<el-form-item>
 					<div style="text-align: center;font-size: 1.8rem;">
-						添加开放性实验
+						修改信息
 					</div>
 				</el-form-item>
 				<el-form-item prop="courseName" label=" ">
@@ -21,14 +23,6 @@
 							placeholder="请输入实验内容" />
 					</div>
 				</el-form-item>
-				<!-- 				<el-form-item prop="roomKind" label="软/硬件:">
-					<div>
-						<el-radio-group v-model="form.roomKind">
-							<el-radio :label="'software'">软件</el-radio>
-							<el-radio :label="'hardtware'">硬件</el-radio>
-						</el-radio-group>
-					</div>
-				</el-form-item> -->
 				<el-form-item>
 					<el-button style="width: 40%;margin-left: 30%;" type="primary" @click="submitForm('form')">提 交
 					</el-button>
@@ -41,7 +35,7 @@
 <script>
 	import request from "@/utils/request";
 	export default {
-		name: "TeacherAddOpeningCourse",
+		name: "TeacherUpdateCourse",
 		data() {
 			return {
 				rules: {
@@ -55,47 +49,32 @@
 						message: '请填写实验内容',
 						trigger: 'blur',
 					}, ],
-					roomKind: [{
-						required: true,
-						message: '请选择软/硬件',
-						trigger: 'change',
-					}, ],
 				},
 				form: {
+					courseId: '',
 					courseName: '',
 					courseContent: '',
-					isOpening: true
 				},
 			}
 		},
 		methods: {
+			prePage() {
+				this.$router.push("/teacherAdjustCourse")
+			},
 			submitForm(formName) {
+				console.log('触发')
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
+						console.log('上传')
 						console.log(this.form)
-						let fileObj = {}
-						let fd = new FormData() // FormData 对象
-						fd.append('file', fileObj) // 文件对象
-						let config = {
-							headers: {
-								'Content-Type': 'multipart/form-data'
-							}
-						}
-						request.post('/addCourse', fd, {
-							params: {
-								courseName: this.form.courseName,
-								courseContent: this.form.courseContent,
-								isOpening: this.form.isOpening
-							}
-						}, config).then(res => {
+						request.post("/updateCourse", this.form).then(res => {
 							console.log(res)
 							if (res.code === '0') {
 								this.$message({
 									type: "success",
-									message: "创建成功"
+									message: "修改成功"
 								})
-								this.form.courseName = ''
-								this.form.courseContent = ''
+								this.form = {}
 							} else {
 								this.$message({
 									type: "error",
@@ -110,6 +89,9 @@
 				})
 			},
 		},
+		mounted() {
+			this.form.courseId = sessionStorage.getItem("updateCourseId");
+		}
 	}
 </script>
 

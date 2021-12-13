@@ -30,7 +30,7 @@
 							<el-button type="primary">选取文件</el-button>
 						</template>
 						<el-button type="primary" style="width: 50%;position: relative;top: 3.75rem;"
-							@click="submitUpload" :disabled="(fileList.length > 0) ? false : true">提 交
+							@click="submitUpload">提 交
 						</el-button>
 					</el-upload>
 				</el-form-item>
@@ -84,28 +84,33 @@
 				let fileObj = param.file // 相当于input里取得的files
 				let fd = new FormData() // FormData 对象
 				fd.append('file', fileObj) // 文件对象
-				fd.append('courseName', this.form.courseName)
-				fd.append('courseContent', this.form.courseContent)
-				fd.append('isOpening', this.form.isOpening)
 				let config = {
 					headers: {
 						'Content-Type': 'multipart/form-data'
 					}
 				}
-				/* request.post('addCourse', fd, config).then(res => {
+				request.post('/addCourse', fd, {
+					params: {
+						courseName: this.form.courseName,
+						courseContent: this.form.courseContent,
+						isOpening: this.form.isOpening
+					}
+				}, config).then(res => {
 					if (res.code === '0') {
 						this.$message({
 							type: "success",
 							message: "提交成功"
 						})
 						this.fileList = []
+						this.form.courseName = ''
+						this.form.courseContent = ''
 					} else {
 						this.$message({
 							type: "error",
 							message: res.msg
 						})
 					}
-				}) */
+				})
 			},
 			beforeAvatarUpload(file) {
 				var testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
@@ -127,7 +132,10 @@
 				return extension && isLt2M
 			},
 			submitUpload() {
-				this.$refs.upload.submit()
+				if (this.fileList.length > 0)
+					this.$refs.upload.submit()
+				else
+					return
 			},
 			handleRemove(file, fileList) {
 				this.fileList = fileList

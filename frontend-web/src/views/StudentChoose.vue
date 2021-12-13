@@ -26,8 +26,8 @@
 		</el-form-item>
 		<el-form-item prop="roomid" label="选择机房">
 			<el-select v-model="ruleForm.roomid" placeholder="选择机房">
-				<el-option v-for="item in rooms" :key="item.value" :label="item.roomid+' 已用'+item.used+'/总计'+item.total"
-					:value="item.roomid">
+				<el-option v-for="item in rooms" :key="item.value" :label="item.roomName+'剩余座位:'+item.occupiedDevice"
+					:value="item.roomId">
 				</el-option>
 			</el-select>
 		</el-form-item>
@@ -110,28 +110,22 @@
 		},
 		methods: {
 			explorRooms() {
+
 				if (this.ruleForm.coursedate != '' && this.ruleForm.coursetime != '') {
 					//搜索机房接口
-					request.get("http://rap2api.taobao.org/app/mock/294824/getMessageList", {
+					request.post("/room/openCourse", {
+						courseId: this.ruleForm.courseid
+					}, {
 						params: {
-							coursedate: this.ruleForm.coursedate,
-							coursetime: this.ruleForm.coursetime,
+
+							date: this.ruleForm.coursedate,
+							time: this.ruleForm.coursetime,
 						}
 					}).then(res => {
 						console.log(res)
-						this.rooms = [{
-							"roomid": 1001,
-							"total": 50,
-							"used": 30
-						}, {
-							"roomid": 1002,
-							"total": 40,
-							"used": 0
-						}, {
-							"roomid": 1003,
-							"total": 50,
-							"used": 1
-						}]
+						if (res.code === "0") {
+							this.rooms = res.data
+						}
 					})
 				}
 
@@ -144,25 +138,28 @@
 					if (valid) {
 						console.log(this.ruleForm)
 						//学生选座位接口
-						request.post("http://rap2api.taobao.org/app/mock/294824/getMessageList", this
-							.ruleForm).then(res => {
-							// if (res.code === '0') {
-							//   this.$message({
-							//     message: "添加成功",
-							//     type: "success"
-							//   });
-							// } else {
-							//   this.$message({
-							//     message: res.msg,
-							//     type: "error"
-							//   });
-							// }
-							this.$router.push('/openingClass')
-							this.$message({
-								message: '选课成功',
-								type: "success"
-							});
-							this.ruleForm = {}
+						request.post("/arrangement/chooseOpenCourse", null, {
+							params: {
+								courseId: this.ruleForm.courseid,
+								date: this.ruleForm.coursedate,
+								time: this.ruleForm.coursetime,
+								roomId: this.ruleForm.roomid
+							}
+						}).then(res => {
+							if (res.code === "0") {
+								this.$router.push('/studentOpeningClass')
+								this.$message({
+									message: '选课成功',
+									type: "success"
+								});
+								this.ruleForm = {}
+							} else {
+								this.$message({
+									message: '选课失败',
+									type: "error"
+								});
+							}
+
 						})
 					} else {
 						console.log('error submit!!')
