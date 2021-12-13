@@ -84,15 +84,16 @@
 				let fileObj = param.file // 相当于input里取得的files
 				let fd = new FormData() // FormData 对象
 				fd.append('file', fileObj) // 文件对象
-				fd.append('courseName', this.form.courseName)
-				fd.append('courseContent', this.form.courseContent)
-				fd.append('isOpening', this.form.isOpening)
 				let config = {
 					headers: {
 						'Content-Type': 'multipart/form-data'
 					}
 				}
-				/* request.post('addCourse', fd, config).then(res => {
+				request.post('/addCourse', fd,{params:{
+					courseName:this.form.courseName,
+					courseContent:this.form.courseContent,
+					isOpening:this.form.isOpening
+				}}, config).then(res => {
 					if (res.code === '0') {
 						this.$message({
 							type: "success",
@@ -105,7 +106,7 @@
 							message: res.msg
 						})
 					}
-				}) */
+				})
 			},
 			beforeAvatarUpload(file) {
 				var testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)

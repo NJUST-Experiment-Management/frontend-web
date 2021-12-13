@@ -50,11 +50,6 @@ const routes = [
                 component: () => import('@/views/AdminAddAdmin')
             },
             {
-                path: '/adminExamManage',
-                name: 'AdminExamManage',
-                component: () => import('@/views/AdminExamManage')
-            },
-            {
                 path: '/adminMsgHistory',
                 name: 'AdminMsgHistory',
                 component: () => import('@/views/AdminMsgHistory')
@@ -64,6 +59,11 @@ const routes = [
                 name: 'AdminMsgRelease',
                 component: () => import('@/views/AdminMsgRelease')
             },
+			{
+			  path: '/teacherUpdateCourse',
+			  name: 'TeacherUpdateCourse',
+			  component: () => import('@/views/TeacherUpdateCourse')
+			},
 
             // 老师路由
             {
