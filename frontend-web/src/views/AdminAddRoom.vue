@@ -11,22 +11,22 @@
 								新增机房
 							</div>
 						</el-form-item>
-						<el-form-item label="机房编号" prop="roomName">
-							<el-input v-model="roomForm.roomName" placeholder="请输入机房">
+						<el-form-item label="机房名:" prop="roomName">
+							<el-input v-model="roomForm.roomName" placeholder="请输入机房名">
 							</el-input>
 						</el-form-item>
 
 						<el-form-item label="机房行列:" required>
 							<div style="display: flex; flex-direction: row;">
 								<el-form-item prop="roomRow">
-									<el-input v-model.number="roomForm.roomRow" placeholder="请输入行数"
+									<el-input v-model.number="roomForm.roomRow" placeholder="请输入行数(1-5)"
 										@change="checkRow()">
 									</el-input>
 								</el-form-item>
 								<el-form-item prop="roomCol">
 									<!--							<el-input v-model.number="roomForm.roomCol" placeholder="请输入列数" @change="checkCol()">-->
 									<!--							</el-input>-->
-									<el-select v-model="roomForm.roomCol" placeholder="请输入列数" @change="checkCol()">
+									<el-select v-model="roomForm.roomCol" placeholder="请输入列数(6-10)" @change="checkCol()">
 										<el-option v-for="item in columnData" :key="item.value" :label="item.label"
 											:value="item.value">
 										</el-option>
@@ -36,20 +36,20 @@
 							</div>
 						</el-form-item>
 
-						<el-form-item label="房间类型" prop="roomKind">
-							<el-radio-group v-model="roomForm.roomKind">
+						<el-form-item label="房间类型:" prop="roomKind">
+							<el-radio-group v-model="roomForm.roomKind" style="margin-top: 12px;">
 								<el-radio label="software">软件机房</el-radio>
 								<el-radio label="hardware">硬件机房</el-radio>
 							</el-radio-group>
 						</el-form-item>
-						<el-form-item label="房间状态" prop="roomStatus">
-							<el-radio-group v-model="roomForm.roomStatus">
+						<el-form-item label="房间状态:" prop="roomStatus">
+							<el-radio-group v-model="roomForm.roomStatus" style="margin-top: 12px;">
 								<el-radio label="available" style="margin-right: 60px">启用</el-radio>
 								<el-radio label="disabled">禁用</el-radio>
 							</el-radio-group>
 						</el-form-item>
 						<el-form-item>
-							<el-button type="primary" @click="onSubmit ,dialogAddVisible=true">立即创建</el-button>
+							<el-button type="primary" @click="onSubmit('roomForm')">立即创建</el-button>
 							<el-button @click="resetForm('roomForm')">重置</el-button>
 						</el-form-item>
 					</el-form>
@@ -72,7 +72,7 @@
 		<el-row justify="center">
 			<div slot="footer" class="dialog-footer">
 				<el-button @click="dialogAddVisible = false">取 消</el-button>
-				<el-button type="primary" @click="addroom">确 定</el-button>
+				<el-button type="primary" @click="addroom('roomForm')">确 定</el-button>
 			</div>
 		</el-row>
 	</el-dialog>
@@ -112,7 +112,7 @@
 				rules: {
 					roomName: [{
 						required: true,
-						message: '请填写机房编号',
+						message: '请输入机房名',
 						trigger: 'blur',
 					}, ],
 					roomKind: [{
@@ -132,7 +132,7 @@
 					}, ],
 					roomRow: [{
 						required: true,
-						message: '请输入机房列数',
+						message: '请输入机房行数',
 						trigger: 'blur',
 					}, ],
 
@@ -149,35 +149,50 @@
 		},
 		methods: {
 
-			onSubmit() {
-				// this.$refs.upload.submit()
-				console.log("submit success");
-				// this.dialogAddVisible = true
-			},
-			addroom() {
-				console.log(this.roomForm)
-				request.post('/room/add', this.roomForm).then(res => {
-					console.log(res)
-					if (res.code === '0') {
-						this.$message({
-							type: "success",
-							message: "新建成功"
-						})
-						this.$router.push('/adminAddRoom')
+			onSubmit(formName) {
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						this.dialogAddVisible=true
 					} else {
-						this.$message({
-							type: "error",
-							message: res.msg
-						})
+						console.log('失败')
+						return false
 					}
 				})
+				 
+			},
+			addroom(formName) {
+				console.log(this.roomForm)
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						request.post('/room/add', this.roomForm).then(res => {
+							console.log(res)
+							if (res.code === '0') {
+								this.$message({
+									type: "success",
+									message: "新建成功"
+								})
+								this.$router.push('/adminAddRoom')
+							} else {
+								this.$message({
+									type: "error",
+									message: res.msg
+								})
+							}
+						})
+				
+					} else {
+						console.log('失败')
+						return false
+					}
+				})
+				
 			},
 			resetForm(formName) {
 				this.$refs[formName].resetFields();
 			},
 			checkRow() {
 				var regPos = /^[0-9]+.?[0-9]*/;
-				if (this.roomForm.roomRow <= 0 || !regPos.test(this.roomForm.roomRow)) {
+				if (this.roomForm.roomRow > 5  ||this.roomForm.roomRow <= 0 || !regPos.test(this.roomForm.roomRow)) {
 					this.$message.error("请输入正确的行数!")
 					delete this.roomForm.roomRow;
 				}

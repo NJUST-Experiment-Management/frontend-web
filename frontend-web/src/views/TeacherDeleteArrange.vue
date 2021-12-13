@@ -7,8 +7,8 @@
 			<el-form ref="form" style="padding: 0 5%  0  5% ;margin-top: 0px;">
 				<!--				<el-form-item>-->
 				<div style="text-align: center; font-size: 1.0rem;">
-					课程ID&nbsp;<i class="el-icon-caret-right"></i>
-					<el-button type="primary" size="mini">{{courseId}}</el-button>
+					课程名称&nbsp;<i class="el-icon-caret-right"></i>
+					<el-button type="primary" size="mini">{{courseName}}</el-button>
 				</div>
 				<!--				</el-form-item>-->
 				<el-form-item>
@@ -37,12 +37,14 @@
 		data() {
 			return {
 				courseId: '',
+				courseName:'',
 				arranges: [],
 				selectedArrange: [],
 			}
 		},
 		created() {
 			this.courseId = sessionStorage.getItem("deleteCourseId");
+			this.courseName = sessionStorage.getItem("courseName", name)
 			this.loading = true
 			request.get("/arrangement/course", {
 				params: {

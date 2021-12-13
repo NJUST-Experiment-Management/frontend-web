@@ -48,6 +48,7 @@
 				request.get("/findCourse/open").then(res => {
 					if (res.code == "0") {
 						this.tableData = res.data
+						console.log(res)
 						this.loading = false
 					} else {
 						this.$message({

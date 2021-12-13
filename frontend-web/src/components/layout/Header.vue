@@ -15,7 +15,7 @@
 		<!--    <el-col :span="4"><div style="margin-top: 10px; padding-left: 30px; font-weight: bold; color:#4a389b;font-size: 25px">NJUST-实验室机房排课系统</div></el-col>-->
 		<el-col :span="4" style="margin-top: 10px">
 			<el-badge :value=messages class="item" v-if="messages!=0">
-				<el-button size="small" @click="messageList">消息</el-button>
+				<el-button size="small" @click="messageList"><i class="el-icon-message"> </i>&nbsp;消息</el-button>
 			</el-badge>
 			<el-button size="mini" @click="messageList" v-if="messages==0"><i class="el-icon-message"> </i>&nbsp;消 息
 			</el-button>

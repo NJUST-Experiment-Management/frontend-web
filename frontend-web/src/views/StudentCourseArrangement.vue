@@ -6,7 +6,7 @@
 		<el-table-column prop="arrangeTime" label="大节" />
 		<el-table-column prop="teacherName" label="教师姓名" />
 		<el-table-column prop="courseName" label="课程名" />
-		<el-table-column prop="courseName" label="课程内容" width="360" />
+<!-- 		<el-table-column prop="courseName" label="课程内容" width="360" /> -->
 		<el-table-column prop="roomName" label="机房" />
 		<el-table-column prop="deviceRow" label="所在行" />
 		<el-table-column prop="deviceCol" label="所在列" />

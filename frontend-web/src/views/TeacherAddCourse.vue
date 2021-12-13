@@ -29,7 +29,7 @@
 						<template #trigger>
 							<el-button type="primary">选取文件</el-button>
 						</template>
-						<el-button type="primary" style="width: 50%;position: relative;top: 3.75rem;"
+						<el-button type="primary" style="width: 50%;position: relative;top: 80px;"
 							@click="submitUpload">提 交
 						</el-button>
 					</el-upload>
@@ -134,8 +134,13 @@
 			submitUpload() {
 				if (this.fileList.length > 0)
 					this.$refs.upload.submit()
-				else
-					return
+				else{
+					this.$message({
+						message: '请选择文件',
+						type: 'warning'
+					});
+				}
+					
 			},
 			handleRemove(file, fileList) {
 				this.fileList = fileList

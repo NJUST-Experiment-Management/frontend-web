@@ -1,6 +1,6 @@
 <template>
 	<!-- 选择开放性实验时间页面 -->
-	<el-button type="primary" @click="back()">返回开放性实验列表</el-button>
+	<el-button type="primary" @click="back()">返回</el-button>
 	<el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="120px" class="form">
 		<el-form-item label="实验名称" prop="coursename" class="name">
 			<el-input v-model="ruleForm.coursename" disabled></el-input>
@@ -14,7 +14,7 @@
 					</el-date-picker>
 				</el-form-item>
 			</el-col>
-			<el-col :span="2">-</el-col>
+			<el-col :span="1"> &nbsp; </el-col>
 			<el-col :span="11">
 				<el-form-item prop="coursedate">
 					<el-select v-model="ruleForm.coursetime" placeholder="选择大节" @change="explorRooms()">
@@ -31,8 +31,8 @@
 				</el-option>
 			</el-select>
 		</el-form-item>
-		<el-form-item>
-			<el-button type="primary" @click="submitForm('ruleForm')">确定</el-button>
+		<el-form-item >
+			<el-button type="primary" @click="submitForm('ruleForm')" style="margin-left: 35%;">确定</el-button>
 		</el-form-item>
 	</el-form>
 
@@ -173,7 +173,7 @@
 
 <style scoped>
 	.form {
-		margin-top: 20px;
+		margin: 0 auto;
 		border: 1px solid lavender;
 		padding: 30px;
 		width: 900px;

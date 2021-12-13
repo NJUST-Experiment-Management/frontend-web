@@ -12,7 +12,7 @@
 					<el-form-item>
 						<el-table height="450" :data="courses" style="width: 100%; ">
 							<el-table-column prop="courseName" label="课程名称" width="200px" />
-							<el-table-column prop="courseContent" label="课程名称" />
+							<el-table-column prop="courseContent" label="课程内容" />
 							<el-table-column prop="createTime" label="创建时间" width="200px">
 								<template v-slot="scope">
 									<i class="el-icon-time"></i>
@@ -22,14 +22,11 @@
 							</el-table-column>
 							<el-table-column label="实验类型" width="150px">
 								　<template v-slot="scope">
-									<el-button v-if="this.user.userType==='TEACHER'"
-										:type="btnColor(scope.row.isOpening)" size="mini" round>
-										{{scope.row.isOpening===true?'开放实验':'课程实验' }}
-									</el-button>
-									<el-button v-if="this.user.userType==='ADMIN'" :type="btnColor(scope.row.isOpening)"
-										size="mini" round>
-										{{scope.row.isOpening===true?'开放实验':'课程实验/考试' }}
-									</el-button>
+									<el-tag type="primary" v-if="this.user.userType==='TEACHER'"
+										style="width: 100px;text-align: center;" >{{scope.row.isOpening===true?'开放实验':'课程实验' }}</el-tag>
+								<el-tag type="primary" v-if="this.user.userType==='ADMIN'" 
+									style="width: 100px; text-align: center;" >{{scope.row.isOpening===true?'开放实验':'课程实验/考试' }}</el-tag>
+	
 								</template>
 							</el-table-column>
 							<el-table-column align="center" label="操作">
@@ -44,7 +41,7 @@
 										</el-button>
 										<el-button type="text" :disabled="scope.row.isOpening?true:false" size="mini"
 											@click="deleteArrange(scope.row.courseId,scope.row.courseName)">
-											删除安排
+											安排管理
 										</el-button>
 										<el-button type="text" size="mini" @click="deleteCourse(scope.row.courseId)">
 											删除课程

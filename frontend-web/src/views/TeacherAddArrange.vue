@@ -85,8 +85,12 @@
 					<el-table ref="multipleTable" :data="rooms" style="width: 100%"
 						@selection-change="handleRoomSelectionChange">
 						<el-table-column type="selection" width="55" />
-						<el-table-column align="center" property="roomId" label="机房号" />
-						<el-table-column align="center" property="occupiedDevice" label="座位余量" />
+						<el-table-column align="center" property="roomName" label="机房名称" />
+						<el-table-column align="center" property="occupiedDevice" label="余量/总量">
+							<template v-slot="scope">
+								{{scope.row.occupiedDevice+'/'+scope.row.roomCol*scope.row.roomRow }}
+							</template>
+						</el-table-column>
 					</el-table>
 				</el-form-item>
 				<el-form-item>
@@ -310,9 +314,14 @@
 			},
 			submitForm(formName) {
 				if (this.courseTotal > this.total)
+				{
+					this.$message({
+						type: "error",
+						message: "请选择足够的机位！"
+					})
 					return
+				}
 				if (this.value === '0') {
-					console.log(this.addForm)
 					request.post("arrangement/add/course",
 						this.addForm.roomId, {
 							params: {
@@ -332,6 +341,7 @@
 								message: "添加成功"
 							})
 							this.addForm = {}
+							this.$router.push("/teacherAdjustCourse")
 						} else {
 							this.$message({
 								type: "error",

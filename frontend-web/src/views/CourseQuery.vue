@@ -12,7 +12,7 @@
 	<el-table :data="options" height="580" style="width: 100%" v-if="visible" v-loading="loading">
 		<el-table-column prop="roomname" label="机房" width="180" />
 		<el-table-column prop="status" label="状态" width="180" />
-		<el-table-column prop="course" label="课程信息" />
+		<el-table-column prop="course" label="课程名" />
 	</el-table>
 
 </template>

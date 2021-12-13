@@ -31,13 +31,11 @@
 		<!--		这里放各个机位使用信息-->
 		<el-row justify="center">
 
-			<el-card>
-				<el-row :gutter="20" v-for="itemRow of deviceData" :key="itemRow" :span="5" :offset=itemRow*2
-					style="margin-left: 10%">
+			
+				<el-row :gutter="10" v-for="itemRow of deviceData" :key="itemRow" :span="3" :offset=itemRow*2>
 					<el-card>
-						<el-button v-for="device of itemRow " :key="device" style="width: 70px;text-align: center"
-							@click="deviceInfo(device.deviceId)" type="primary" size="small"><i
-								class="el-icon-monitor"></i>
+						<el-button v-for="device of itemRow " :key="device" style="width: 40px;"
+							@click="deviceInfo(device.deviceId)" type="primary" size="small">
 							{{(device.deviceRow-1)*roomInfo.roomCol+device.deviceCol}}
 						</el-button>
 					</el-card>
@@ -50,7 +48,7 @@
 						</el-button>
 					</el-card>
 				</el-row> -->
-			</el-card>
+			
 		</el-row>
 
 		<el-row justify="center">
