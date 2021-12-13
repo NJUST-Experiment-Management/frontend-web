@@ -184,19 +184,19 @@
 				}).then(res => {
 					console.log(res)
 					if (res.code === "0") {
-						// if (res.data.length != 0) {
-						// 	this.detailed_date_test = {
-						// 		user_id: res.data[0].userId,
-						// 		user_name: res.data[0].userId,
-						// 		user_phone: res.data[0].userId
-						// 	}
-						// } else {
-						// 	this.detailed_date_test = {
-						// 		user_id: '暂无信息',
-						// 		user_name: '暂无信息',
-						// 		user_phone: '暂无信息'
-						// 	}
-						// }
+						if(res.data!=null){
+							this.detailed_date_test = {
+								user_id: res.data.userId,
+								user_name: res.data.userName,
+								user_phone: res.data.userPhone
+							}
+						} else {
+							this.detailed_date_test = {
+								user_id: '暂无信息',
+								user_name: '暂无信息',
+								user_phone: '暂无信息'
+							}
+						}
 					} else {
 						this.$message({
 							type: "error",
