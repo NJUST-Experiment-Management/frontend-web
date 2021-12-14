@@ -3,8 +3,12 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     user: {},
+	msgNum:0
   },
   mutations: {
+	  setNum(state, msgNum) {
+	    state.msgNum = msgNum
+	  },
     setUser(state, user) {
       state.user = user
     },

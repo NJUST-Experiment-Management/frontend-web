@@ -29,7 +29,7 @@
 				<el-menu-item index="/adminAddRoom"><i class="el-icon-circle-plus"></i>新 增 机 房</el-menu-item>
 			</el-sub-menu>
 			<el-sub-menu index="3" v-if="user.userType == 'ADMIN'">
-				<template #title><i class="el-icon-setting"></i>实验/考试安排</template>
+				<template #title><i class="el-icon-setting"></i>&nbsp;实验/考试安排</template>
 				<el-menu-item index="/teacherAddCourse"><i class="el-icon-circle-plus"></i>添加课程/考试</el-menu-item>
 				<el-menu-item index="/teacherAddOpeningCourse"><i class="el-icon-circle-plus"></i>添加开放性实验</el-menu-item>
 				<el-menu-item index="/teacherAdjustCourse"><i class="el-icon-s-order"></i>安排管理</el-menu-item>
@@ -47,7 +47,7 @@
 			</el-sub-menu>
 			<el-sub-menu index="6" v-if="user.userType == 'ADMIN'">
 				<template #title><i class="el-icon-s-order"></i>&nbsp;人 员 管 理</template>
-				<el-menu-item index="/adminAddUsers"><i class="el-icon-position"></i>人 员 导 入</el-menu-item>
+				<el-menu-item index="/adminAddUsers"><i class="el-icon-s-tools"></i>人 员 导 入</el-menu-item>
 				<el-menu-item index="/adminAddAdmin"><i class="el-icon-s-tools"></i>管理员设置</el-menu-item>
 				<!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
 			</el-sub-menu>

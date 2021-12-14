@@ -40,6 +40,10 @@
 		methods: {
 			load() {
 				this.loading = true
+				request.get("/getMessageNum").then(res => {
+					 this.$store.commit('setNum', res.data);
+				})
+				
 				request.get("/getMessages").then(res => {
 					if (res.code === "0") {
 						console.log(res)

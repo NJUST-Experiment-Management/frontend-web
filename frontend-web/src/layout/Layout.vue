@@ -6,7 +6,7 @@
 		<el-container>
 			<Aside />
 			<el-main>
-				<router-view style="flex: 1" />
+				<router-view style="flex: 1" v-wechat-title='$route.meta.title' />
 			</el-main>
 		</el-container>
 			<Footer></Footer>

@@ -14,10 +14,10 @@
 		<!--    </el-col>-->
 		<!--    <el-col :span="4"><div style="margin-top: 10px; padding-left: 30px; font-weight: bold; color:#4a389b;font-size: 25px">NJUST-实验室机房排课系统</div></el-col>-->
 		<el-col :span="4" style="margin-top: 10px">
-			<el-badge :value=messages class="item" v-if="messages!=0">
+			<el-badge :value=getNum class="item" v-if="getNum!=0">
 				<el-button size="small" @click="messageList"><i class="el-icon-message"> </i>&nbsp;消息</el-button>
 			</el-badge>
-			<el-button size="mini" @click="messageList" v-if="messages==0"><i class="el-icon-message"> </i>&nbsp;消 息
+			<el-button size="mini" @click="messageList" v-if="getNum==0"><i class="el-icon-message"> </i>&nbsp;消 息
 			</el-button>
 			<el-button type="danger" size="mini" style="margin-left: 10px" @click="exit"><i
 					class="el-icon-switch-button"> </i>&nbsp;退 出</el-button>
@@ -48,10 +48,16 @@
 			this.user = JSON.parse(sessionStorage.getItem("user"));
 			this.getMessageNum()
 		},
+		computed:{
+			getNum(){
+				return this.$store.state.msgNum
+			}
+		},
+		
 		methods: {
 			getMessageNum() {
 				request.get("/getMessageNum").then(res => {
-					this.messages = res.data
+					this.$store.commit('setNum', res.data);
 				})
 			},
 			messageList() {
