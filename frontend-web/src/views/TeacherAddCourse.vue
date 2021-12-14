@@ -110,6 +110,11 @@
 							message: res.msg
 						})
 					}
+				}).catch(err=>{
+					this.$message({
+						type: "error",
+						message: "请检查学生名单中人员"
+					})
 				})
 			},
 			beforeAvatarUpload(file) {

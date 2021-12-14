@@ -1,20 +1,26 @@
 <template>
 	<!-- 学生查看开放性实验列表页面 -->
-	<el-table :data="tableData" stripe border style="width: 100% ;margin-top: 10px ;" v-loading="loading">
 
-		<el-table-column prop="createTime" label="创建时间" sortable :formatter="dateFormat" />
-		<el-table-column prop="courseName" label="实验名称" />
-		<el-table-column prop="courseContent" label="实验内容" width="600" />
-		<!-- 	<el-table-column prop="teachername" label="实验教师" /> -->
-		<el-table-column label="操作" width="120">
-			<template #default="scope">
-				<el-button size="small" type="primary" @click="choose(scope.$index, tableData)">
-					选择时间
-				</el-button>
-			</template>
-		</el-table-column>
+		<div style="font-size: 1.8rem;margin-left: 40%;">
+			开放性实验选择
+		</div>
+		<el-table :data="tableData" stripe border style="width: 100% ;margin-top: 20px ;" v-loading="loading"
+			:header-cell-style="{background:'#F2F2F2'}">
 
-	</el-table>
+			<el-table-column prop="createTime" label="创建时间" sortable :formatter="dateFormat" />
+			<el-table-column prop="courseName" label="实验名称" />
+			<el-table-column prop="courseContent" label="实验内容" width="500" />
+			<!-- 	<el-table-column prop="teachername" label="实验教师" /> -->
+			<el-table-column label="操作" width="150">
+				<template #default="scope">
+					<el-button size="small" type="primary" @click="choose(scope.$index, tableData)">
+						选择时间
+					</el-button>
+				</template>
+			</el-table-column>
+
+		</el-table>
+
 	<!-- 	<el-pagination background style="margin-top: 50px ;text-align: center;" @size-change="handleSizeChange"
 		@current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[3, 6, 9]" :page-size="pageSize"
 		layout="total, prev, pager, next,sizes" :total="total">

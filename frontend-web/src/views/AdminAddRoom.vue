@@ -172,6 +172,8 @@
 									message: "新建成功"
 								})
 								this.$router.push('/adminAddRoom')
+								this.dialogAddVisible=false
+								this.roomForm={}
 							} else {
 								this.$message({
 									type: "error",

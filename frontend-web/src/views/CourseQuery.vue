@@ -9,10 +9,10 @@
 	</el-select>
 	<el-empty :image-size="300" v-if="isEmpty()"></el-empty>
 
-	<el-table :data="options" height="580" style="width: 100%" v-if="visible" v-loading="loading">
+	<el-table :data="options" height="580" style="width: 100%;margin: 20px auto;" v-if="visible" v-loading="loading" stripe :header-cell-style="{background:'#F2F2F2'}">
 		<el-table-column prop="roomname" label="机房" width="180" />
-		<el-table-column prop="status" label="状态" width="180" />
-		<el-table-column prop="course" label="课程名" />
+		<el-table-column prop="status" label="状态"  />
+		<el-table-column prop="course" label="课程名" width="500"/>
 	</el-table>
 
 </template>

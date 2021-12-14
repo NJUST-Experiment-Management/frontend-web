@@ -1,6 +1,6 @@
 <template>
 	<!-- 老师删除安排页面 -->
-	<el-button @click="prePage()" style="background-color: unset;border: 0px;color:dodgerblue" type="primary">返回
+	<el-button @click="prePage()" style="border: 0px;" type="primary" size="medium">返回
 	</el-button>
 	<el-row>
 		<el-col :span="23" :offset="0">
@@ -12,7 +12,7 @@
 				</div>
 				<!--				</el-form-item>-->
 				<el-form-item>
-					<el-table height="400" :data="arranges" style="width: 100%"
+					<el-table height="400" :data="arranges" style="width: 100% ;margin-top: 20px;" stripe :header-cell-style="{background:'#F2F2F2'}" 
 						@selection-change="handleArrangeSelectionChange" v-loading="loading">
 						<el-table-column type="selection" />
 						<el-table-column prop="arrangeDate" label="排课日期" :formatter="dateFormat" />
@@ -37,7 +37,7 @@
 		data() {
 			return {
 				courseId: '',
-				courseName:'',
+				courseName: '',
 				arranges: [],
 				selectedArrange: [],
 			}

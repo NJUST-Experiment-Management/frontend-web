@@ -1,6 +1,9 @@
 <template>
 	<!-- 学生查看课程安排页面 -->
-	<el-table :data="tableData" stripe border style="width: 100%" v-loading="loading" height="600">
+	<div style="font-size: 1.8rem;margin-left: 40%;">
+		我的课程
+	</div>
+	<el-table :data="tableData" stripe border style="width: 100%;margin-top: 20px;" v-loading="loading" height="600"  :header-cell-style="{background:'#F2F2F2'}">
 
 		<el-table-column prop="arrangeDate" label="课程日期" sortable :formatter="dateFormat" />
 		<el-table-column prop="arrangeTime" label="大节" />

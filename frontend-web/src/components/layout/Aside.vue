@@ -1,6 +1,6 @@
 <template>
 	<el-aside width="200px">
-		<el-menu :default-openeds="['1']" style="height: calc(100vh - 80px);" :default-active="path" router>
+		<el-menu :default-openeds="['1']" style="height: calc(100vh - 120px);" :default-active="path" router>
 			<el-card style="margin-bottom:5px;">
 				<!--        <div style="text-align: center; margin-bottom: 5px">-->
 				<!--          <span >Welcome !</span>-->
@@ -9,7 +9,8 @@
 
 					<el-tag style="display: block; margin-bottom: 5px"><i class="el-icon-user"></i>姓
 						名&nbsp;{{user.userName}}</el-tag>
-					<el-tag style="display: block;"><i class="el-icon-view"></i>学工号&nbsp;{{user.userId}}</el-tag>
+					<el-tag style="display: block;margin-bottom: 5px"><i class="el-icon-view"></i>学工号&nbsp;{{user.userId}}</el-tag>
+					<el-tag style="display: block;"><i class="el-icon-view"></i>身份&nbsp;{{user.userType}}</el-tag>
 					<!--          <el-badge :value=messages class="item">-->
 					<!--            <el-button size="small">消息</el-button>-->
 					<!--          </el-badge>-->
@@ -26,7 +27,6 @@
 				<el-menu-item index="/adminRoomManage"><i class="el-icon-s-platform"></i>机 位 管 理</el-menu-item>
 				<el-menu-item index="/adminRoomHistory"><i class="el-icon-s-order"></i>使 用 记 录</el-menu-item>
 				<el-menu-item index="/adminAddRoom"><i class="el-icon-circle-plus"></i>新 增 机 房</el-menu-item>
-				<el-menu-item index="/adminAddAdmin"><i class="el-icon-s-tools"></i>管理员设置</el-menu-item>
 			</el-sub-menu>
 			<el-sub-menu index="3" v-if="user.userType == 'ADMIN'">
 				<template #title><i class="el-icon-setting"></i>实验/考试安排</template>
@@ -43,6 +43,12 @@
 			<el-sub-menu index="5" v-if="user.userType == 'ADMIN'">
 				<template #title><i class="el-icon-s-order"></i>&nbsp;系 统 消 息</template>
 				<el-menu-item index="/adminMsgRelease"><i class="el-icon-position"></i>消 息 发 布</el-menu-item>
+				<!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
+			</el-sub-menu>
+			<el-sub-menu index="6" v-if="user.userType == 'ADMIN'">
+				<template #title><i class="el-icon-s-order"></i>&nbsp;人 员 管 理</template>
+				<el-menu-item index="/adminAddUsers"><i class="el-icon-position"></i>人 员 导 入</el-menu-item>
+				<el-menu-item index="/adminAddAdmin"><i class="el-icon-s-tools"></i>管理员设置</el-menu-item>
 				<!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
 			</el-sub-menu>
 

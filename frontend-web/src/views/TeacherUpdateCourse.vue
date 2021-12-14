@@ -1,6 +1,6 @@
 <template>
 	<!-- 老师修改课程实验信息页面 -->
-	<el-button @click="prePage()" style="background-color: unset;border: 0px;color:dodgerblue" type="primary">返回
+	<el-button @click="prePage()" style="border: 0px;color:#FFFFFF;" type="primary" size="medium">返回
 	</el-button>
 	<el-row>
 		<el-col :span="16" :offset="4">
@@ -75,6 +75,7 @@
 									message: "修改成功"
 								})
 								this.form = {}
+								this.$router.push("/teacherAdjustCourse")
 							} else {
 								this.$message({
 									type: "error",

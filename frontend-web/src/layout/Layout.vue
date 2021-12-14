@@ -9,17 +9,19 @@
 				<router-view style="flex: 1" />
 			</el-main>
 		</el-container>
-		<!-- 		<el-footer> footer</el-footer> -->
+			<Footer></Footer>
 	</el-container>
 </template>
 
 <script>
 	import Header from "@/components/layout/Header";
 	import Aside from "@/components/layout/Aside";
+	import Footer from "@/components/layout/Footer";
 	export default {
 		components: {
 			Header,
-			Aside
+			Aside,
+			Footer,
 		},
 		name: "Layout",
 

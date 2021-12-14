@@ -6,7 +6,7 @@
 		</el-option>
 	</el-select>
 	<el-card class="box-card">
-		<el-table :data="historyData" style="width: 100%">
+		<el-table :data="historyData" style="width: 100%" stripe :header-cell-style="{background:'#F2F2F2'}">
 			<el-table-column prop="arrangeDate" label="日期" width="180" align="center" sortable>
 				<template v-slot="scope">
 					<i class="el-icon-time"></i>
@@ -34,7 +34,7 @@
 			
 				<el-row :gutter="10" v-for="itemRow of deviceData" :key="itemRow" :span="3" :offset=itemRow*2>
 					<el-card>
-						<el-button v-for="device of itemRow " :key="device" style="width: 40px;"
+						<el-button v-for="device of itemRow " :key="device" style="width: 50px;"
 							@click="deviceInfo(device.deviceId)" type="primary" size="small">
 							{{(device.deviceRow-1)*roomInfo.roomCol+device.deviceCol}}
 						</el-button>

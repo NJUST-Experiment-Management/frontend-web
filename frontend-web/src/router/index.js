@@ -51,6 +51,11 @@ const routes = [{
 				component: () => import('@/views/AdminAddAdmin')
 			},
 			{
+				path: '/adminAddUsers',
+				name: 'AdminAddUsers',
+				component: () => import('@/views/AdminAddUsers')
+			},
+			{
 				path: '/adminMsgHistory',
 				name: 'AdminMsgHistory',
 				component: () => import('@/views/AdminMsgHistory')

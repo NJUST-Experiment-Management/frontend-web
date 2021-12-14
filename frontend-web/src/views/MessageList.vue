@@ -1,12 +1,11 @@
 <template>
-	<el-table :data="msgList" stripe border style="width: 100%; margin: 0 auto;" v-loading="loading" height="450">
+	<el-table :data="msgList"  border style="width: 100%; margin: 0 auto;" v-loading="loading" height="450" stripe :header-cell-style="{background:'#F2F2F2'}">
 		<el-table-column prop="sendTime" label="消息时间" sortable width="130px" :formatter="dateFormat" />
 		<el-table-column prop="content" :show-overflow-tooltip='true' label="消息内容" align="center" />
-		<el-table-column prop="isread" label="状态" align="center" width="80px">
+		<el-table-column prop="isread" label="状态" align="center"  width="80px">
 			<template v-slot="scope">
-				<el-tag type="success" v-if="scope.row.read=== true" style="margin-top: 0px;">已读</el-tag>
-				<el-tag type="danger" v-if="scope.row.read=== false" style="margin-top: 0px;">未读</el-tag>
-				　　　　　
+				<el-tag type="success" v-if="scope.row.read=== true"  style="margin-top: 0px;">已读</el-tag>
+				<el-tag type="danger" v-else="scope.row.read=== false" style="margin-top: 0px;">未读</el-tag>
 			</template>
 		</el-table-column>
 		<el-table-column label="查看" align="center" width="100px">
