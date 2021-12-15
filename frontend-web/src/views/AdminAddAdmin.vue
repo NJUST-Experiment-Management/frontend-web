@@ -26,6 +26,7 @@
 </template>
 
 <script>
+	import request from "@/utils/request";
 	export default {
 		name: "AddminAddAdmin",
 		data() {
@@ -44,24 +45,34 @@
 		},
 		methods: {
 			submitForm(formName) {
-				console.log('触发')
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
-						console.log('上传')
-						/* request.post("/setAdmin", this.ruleForm).then(res => {
-						  console.log(res)
-						  if (res.code === '0') {
-							this.$message({
-							  type: "success",
-							  message: "设置成功"
-							})
-							} else {
-							  this.$message({
-							    type: "error",
-								message: res.msg
-							  })
+						request.get("/setAdmin", {
+							params: {
+								userId: this.ruleForm.teacherId
 							}
-						}) */
+						}).then(res => {
+							console.log(res)
+							if (res.code === '0') {
+								this.$message({
+									type: "success",
+									message: "设置成功"
+								})
+								this.ruleForm = {}
+							} else {
+								this.$message({
+									type: "error",
+									message: res.msg
+								})
+							}
+						}).catch(error => {
+							this.$message({
+								type: "error",
+								message: "输入工号有误"
+							})
+							this.ruleForm = {}
+						});
+
 					} else {
 						console.log('失败')
 						return false

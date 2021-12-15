@@ -17,10 +17,13 @@ request.interceptors.request.use(config => {
 
     // 取出sessionStorage里面缓存的用户信息
     let userJson = sessionStorage.getItem("user")
-
+	console.log('errrr')
+	console.log(userJson)
     if (!whiteUrls.includes(config.url)) {  // 校验请求白名单
         if(!userJson) {
+			console.log('errrr')
             router.push("/login")
+			router.push("/login")
         } else {
             let user = JSON.parse(userJson);
             config.headers['token'] = user.token;  // 设置请求头

@@ -21,14 +21,14 @@
 							placeholder="请输入实验内容" />
 					</div>
 				</el-form-item>
-				<el-form-item prop="roomKind" label="软/硬件:">
+				<!-- 				<el-form-item prop="roomKind" label="软/硬件:">
 					<div>
 						<el-radio-group v-model="form.roomKind">
 							<el-radio :label="'software'">软件</el-radio>
 							<el-radio :label="'hardtware'">硬件</el-radio>
 						</el-radio-group>
 					</div>
-				</el-form-item>
+				</el-form-item> -->
 				<el-form-item>
 					<el-button style="width: 40%;margin-left: 30%;" type="primary" @click="submitForm('form')">提 交
 					</el-button>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+	import request from "@/utils/request";
 	export default {
 		name: "TeacherAddOpeningCourse",
 		data() {
@@ -61,33 +62,47 @@
 					}, ],
 				},
 				form: {
-					coursename: '',
-					coursecontent: '',
+					courseName: '',
+					courseContent: '',
 					isOpening: true
 				},
 			}
 		},
 		methods: {
 			submitForm(formName) {
-				console.log('触发')
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
-						console.log('上传')
 						console.log(this.form)
-						/* request.post("/addOpeningCourse", this.form).then(res => {
-						  console.log(res)
-						  if (res.code === '0') {
-							this.$message({
-							  type: "success",
-							  message: "添加成功"
-							})
-							} else {
-							  this.$message({
-							    type: "error",
-								message: res.msg
-							  })
+						let fileObj = {}
+						let fd = new FormData() // FormData 对象
+						fd.append('file', fileObj) // 文件对象
+						let config = {
+							headers: {
+								'Content-Type': 'multipart/form-data'
 							}
-						}) */
+						}
+						request.post('/addCourse', fd, {
+							params: {
+								courseName: this.form.courseName,
+								courseContent: this.form.courseContent,
+								isOpening: this.form.isOpening
+							}
+						}, config).then(res => {
+							console.log(res)
+							if (res.code === '0') {
+								this.$message({
+									type: "success",
+									message: "创建成功"
+								})
+								this.form.courseName = ''
+								this.form.courseContent = ''
+							} else {
+								this.$message({
+									type: "error",
+									message: res.msg
+								})
+							}
+						})
 					} else {
 						console.log('失败')
 						return false

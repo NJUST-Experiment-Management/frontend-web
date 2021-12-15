@@ -1,0 +1,116 @@
+<template>
+	<!-- 设置管理员界面 -->
+	<el-row>
+		<el-col :span="16" :offset="4">
+			<el-form class="demo-ruleForm" :model="ruleForm" :rules="rules" ref="ruleForm"
+				style="padding: 0 5%  0  5% ;margin-top: 10px;">
+				<el-form-item>
+					<div style="text-align: center;font-size: 1.8rem;">
+						人员导入
+					</div>
+				</el-form-item>
+				<el-form-item label="上传学生名单:" required>
+						<el-upload class="upload-demo" ref="upload" multiple action="" :limit="1"
+							:on-preview="handlePreview" :on-remove="handleRemove" :on-change="handleChange"
+							:http-request="httpRequest" :file-list="fileList" :auto-upload="false" accept=".xls, .xlsx"
+							:before-upload="beforeAvatarUpload">
+							<template #trigger>
+								<el-button type="primary">选取文件</el-button>
+							</template>
+							<el-button type="primary" style="width: 50%;position: relative;top: 80px;"
+								@click="submitUpload">提 交
+							</el-button>
+						</el-upload>
+					</el-form-item>
+				
+			</el-form>
+		</el-col>
+	</el-row>
+</template>
+
+<script>
+	import request from "@/utils/request";
+	export default {
+		name: "AdminAddUsers",
+		data() {
+			return {
+				fileList: [],
+			}
+		},
+		methods: {
+			httpRequest(param) {
+				console.log(param.file)
+				let fileObj = param.file // 相当于input里取得的files
+				let fd = new FormData() // FormData 对象
+				fd.append('file', fileObj) // 文件对象
+				let config = {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				}
+				request.post('/importUser', fd, config).then(res => {
+					console.log(res)
+					if (res.code === '0') {
+						this.$message({
+							type: "success",
+							message: "提交成功"
+						})
+						this.fileList = []
+					} else {
+						this.$message({
+							type: "error",
+							message: res.msg
+						})
+					}
+				}).catch(err=>{
+					this.$message({
+						type: "error",
+						message: "请检查学生名单中人员"
+					})
+				})
+			},
+			beforeAvatarUpload(file) {
+				var testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
+				const whiteList = ["xls", "xlsx"];
+				const extension = !(whiteList.indexOf(testmsg) === -1);
+				if (!extension) {
+					this.$message({
+						message: '上传文件只能是 xls、xlsx格式!',
+						type: 'warning'
+					});
+				}
+				const isLt2M = file.size / 1024 / 1024 < 10
+				if (!isLt2M) {
+					this.$message({
+						message: '上传文件大小不能超过 10MB!',
+						type: 'warning'
+					});
+				}
+				return extension && isLt2M
+			},
+			submitUpload() {
+				if (this.fileList.length > 0)
+					this.$refs.upload.submit()
+				else{
+					this.$message({
+						message: '请选择文件',
+						type: 'warning'
+					});
+				}
+					
+			},
+			handleRemove(file, fileList) {
+				this.fileList = fileList
+			},
+			handlePreview(file) {
+				console.log(file)
+			},
+			handleChange(file, fileList) {
+				this.fileList = fileList
+			},
+		}
+	}
+</script>
+
+<style>
+</style>

@@ -1,24 +1,30 @@
 <template>
 	<!-- 学生查看开放性实验列表页面 -->
-	<el-table :data="tableData" stripe border style="width: 100% ;margin-top: 10px ;" v-loading="loading">
 
-		<el-table-column prop="createtime" label="创建时间" sortable />
-		<el-table-column prop="coursename" label="实验名称" />
-		<el-table-column prop="content" label="实验内容" width="600" />
-		<el-table-column prop="teachername" label="实验教师" />
-		<el-table-column label="操作" width="120">
-			<template #default="scope">
-				<el-button size="small" type="primary" @click="choose(scope.$index, tableData)">
-					选择时间
-				</el-button>
-			</template>
-		</el-table-column>
+		<div style="font-size: 1.8rem;margin-left: 40%;">
+			开放性实验选择
+		</div>
+		<el-table :data="tableData" stripe border style="width: 100% ;margin-top: 20px ;" v-loading="loading"
+			:header-cell-style="{background:'#F2F2F2'}">
 
-	</el-table>
-	<el-pagination background style="margin-top: 50px ;text-align: center;" @size-change="handleSizeChange"
+			<el-table-column prop="createTime" label="创建时间" sortable :formatter="dateFormat" />
+			<el-table-column prop="courseName" label="实验名称" />
+			<el-table-column prop="courseContent" label="实验内容" width="500" />
+			<!-- 	<el-table-column prop="teachername" label="实验教师" /> -->
+			<el-table-column label="操作" width="150">
+				<template #default="scope">
+					<el-button size="small" type="primary" @click="choose(scope.$index, tableData)">
+						选择时间
+					</el-button>
+				</template>
+			</el-table-column>
+
+		</el-table>
+
+	<!-- 	<el-pagination background style="margin-top: 50px ;text-align: center;" @size-change="handleSizeChange"
 		@current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[3, 6, 9]" :page-size="pageSize"
 		layout="total, prev, pager, next,sizes" :total="total">
-	</el-pagination>
+	</el-pagination> -->
 
 </template>
 
@@ -33,42 +39,7 @@
 				currentPage: 1,
 				pageSize: 6,
 				total: 9,
-				tableData: [{
-						courseid: '1',
-						createtime: 1,
-						coursename: 1,
-						content: 1,
-						teachername: 'zty'
-					},
-					{
-						courseid: '2',
-						createtime: 2,
-						coursename: 2,
-						content: 1,
-						teachername: 'zty'
-					},
-					{
-						courseid: '3',
-						createtime: 3,
-						coursename: 3,
-						content: 1,
-						teachername: 'zty'
-					},
-					{
-						courseid: '4',
-						createtime: 4,
-						coursename: 4,
-						content: 1,
-						teachername: 'zty'
-					},
-					{
-						courseid: '5',
-						createtime: 5,
-						coursename: 5,
-						content: 1,
-						teachername: 'zty'
-					},
-				],
+				tableData: [],
 			}
 		},
 		created() {
@@ -79,22 +50,24 @@
 
 		methods: {
 			load() {
-				// this.loading = true
-				// request.get("/course", {
-				//   params: {
-				//     pageNum: this.currentPage,
-				//     pageSize: this.pageSize,
-				//   }
-				// }).then(res => {
-				//   this.loading = false
-				//   this.tableData = res.data.records
-				//   this.total = res.data.total
-				// })
-				console.log(1)
+				this.loading = true
+				request.get("/findCourse/open").then(res => {
+					if (res.code == "0") {
+						this.tableData = res.data
+						console.log(res)
+						this.loading = false
+					} else {
+						this.$message({
+							type: "error",
+							message: res.msg
+						})
+					}
+
+				})
 			},
 			choose(index, e) {
-				sessionStorage.setItem("coursename", e[index].coursename)
-				sessionStorage.setItem("courseid", e[index].courseid)
+				sessionStorage.setItem("coursename", e[index].courseName)
+				sessionStorage.setItem("courseid", e[index].courseId)
 				this.$router.push({
 					name: 'StudentChoose',
 				})
@@ -106,6 +79,17 @@
 			handleCurrentChange(pageNum) { // 改变当前页码触发
 				this.currentPage = pageNum
 				this.load()
+			},
+			dateFormat(row, column, cellValue, index) {
+				const daterc = row[column.property]
+				if (daterc != null) {
+					let date = new Date(daterc);
+					let year = date.getFullYear();
+					let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+					let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+					// 拼接
+					return year + "-" + month + "-" + day
+				}
 			}
 		},
 	}
