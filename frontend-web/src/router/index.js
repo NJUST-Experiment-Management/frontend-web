@@ -138,14 +138,6 @@ const routes = [{
 					title:'课程安排管理'
 				}
 			},
-			{
-				path: '/studentCourseList',
-				name: 'StudentCourseList',
-				component: () => import('@/views/StudentCourseList'),
-				meta:{
-					title:'课程学生列表'
-				}
-			},
 
 			// 学生路由
 			{

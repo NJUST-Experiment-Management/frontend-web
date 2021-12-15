@@ -35,9 +35,6 @@
 									<div style="display: flex;align-items: center;">
 										<el-button type="text" style="display: none;" :disabled="true" size="mini">
 										</el-button>
-										<!-- <el-button type="text" size="mini" @click="studentList(scope.row.courseId,scope.row.courseName)">
-											学生列表
-										</el-button> -->
 										<el-button type="text" :disabled="scope.row.isOpening?true:false" size="mini"
 											@click="addArrange(scope.row.courseId,scope.row.total,scope.row.courseName)">
 											添加安排

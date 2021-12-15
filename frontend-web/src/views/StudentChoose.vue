@@ -41,7 +41,7 @@
 <script>
 	import request from "@/utils/request";
 	export default {
-		name: "StudentOpeningClass",
+		name: "StudentChoose",
 		data() {
 			return {
 				user: {},
