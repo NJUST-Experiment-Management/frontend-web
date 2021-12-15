@@ -9,8 +9,13 @@
 
 					<el-tag style="display: block; margin-bottom: 5px"><i class="el-icon-user"></i>姓
 						名&nbsp;{{user.userName}}</el-tag>
-					<el-tag style="display: block;margin-bottom: 5px"><i class="el-icon-view"></i>学工号&nbsp;{{user.userId}}</el-tag>
-					<el-tag style="display: block;"><i class="el-icon-view"></i>身份&nbsp;{{user.userType}}</el-tag>
+					<el-tag style="display: block;margin-bottom: 5px"><i
+							class="el-icon-view"></i>学工号&nbsp;{{user.userId}}</el-tag>
+					<el-tag style="display: block;margin-bottom: 5px"><i
+							class="el-icon-postcard"></i>身份&nbsp;{{user.userType}}</el-tag>
+					<el-tag style="display: block;"><i class="el-icon-copy-document"></i>
+						<el-button type="text" size="small" @click="updateInfo">密 码 修 改</el-button>
+					</el-tag>
 					<!--          <el-badge :value=messages class="item">-->
 					<!--            <el-button size="small">消息</el-button>-->
 					<!--          </el-badge>-->
@@ -58,8 +63,24 @@
 				<el-menu-item index="/StudentOpeningClass"><i class="el-icon-zoom-in"></i>选择开放性实验</el-menu-item>
 
 			</el-sub-menu>
-
-
+			<el-dialog v-model="dialogFormVisible" title="密码修改" style="top: 100px;">
+				<el-form :model="form" ref="form">
+					<el-form-item prop="password" label=" 新  密  码 : " required>
+						<el-input v-model="form.password" autocomplete="off" placeholder="请输入新密码(长度≤15)" maxlength="15"
+							show-password clearable></el-input>
+					</el-form-item>
+					<el-form-item prop="passwordRepeat" label="确认密码:" required>
+						<el-input v-model="form.passwordRepeat" autocomplete="off" placeholder="请确认密码" maxlength="15"
+							show-password clearable></el-input>
+					</el-form-item>
+				</el-form>
+				<template #footer>
+					<span class="dialog-footer">
+						<el-button @click="dialogFormVisible = false">取消</el-button>
+						<el-button type="primary" @click="submitForm('form')">确认修改</el-button>
+					</span>
+				</template>
+			</el-dialog>
 		</el-menu>
 	</el-aside>
 
@@ -73,7 +94,12 @@
 		data() {
 			return {
 				user: {},
+				dialogFormVisible: false,
 				messages: 0,
+				form: {
+					password: '',
+					passwordRepeat: ''
+				}
 			}
 		},
 		created() {
@@ -81,6 +107,50 @@
 			this.getMessageNum()
 		},
 		methods: {
+			submitForm(formName) {
+				console.log(formName)
+				console.log(this.form)
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						console.log(this.form)
+						if (this.form.password != this.form.passwordRepeat) {
+							this.$message({
+								type: "error",
+								message: '两次密码输入不一致'
+							})
+							return false
+						}
+								request.post('/updateUser', {
+									password: this.form.password,
+									userId:this.user.userId
+								}).then(res => {
+									console.log(res)
+									if (res.code === "0") {
+										this.$message({
+											type: "success",
+											message: '修改成功，请重新登录'
+										})
+										this.$router.push("/login")
+										this.dialogFormVisible=false
+
+									} else {
+										this.$message({
+											type: "error",
+											message: res.msg
+										})
+									}
+	
+
+								})
+					} else {
+						console.log('失败')
+						return false
+					}
+				})
+			},
+			updateInfo() {
+				this.dialogFormVisible = true
+			},
 			getMessageNum() {
 				request.get("/getMessageNum").then(res => {
 					this.messages = res.data
