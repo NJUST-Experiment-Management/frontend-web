@@ -1,43 +1,121 @@
 <template>
 	<!-- 设置管理员界面 -->
-	<el-row>
-		<el-col :span="16" :offset="4">
-			<el-form class="demo-ruleForm" :model="ruleForm" :rules="rules" ref="ruleForm"
-				style="padding: 0 5%  0  5% ;margin-top: 10px;">
-				<el-form-item>
+	
+			
 					<div style="text-align: center;font-size: 1.8rem;">
-						人员导入
+						用户管理
 					</div>
-				</el-form-item>
-				<el-form-item label="上传学生名单:" required>
+
+				<div style="display: flex;flex-direction: column;align-items: flex-start;">
+				<el-form class="demo-ruleForm" :model="ruleForm" :rules="rules" ref="ruleForm"
+					style="margin-top: 10px;display: flex;flex-direction: row;">
+					<el-select @change="changeUserType()" v-model="userType" placeholder="Select">
+						<el-option v-for="item in options" :key="item.value" :label="item.label"
+							:value="item.value">
+						</el-option>
+					</el-select>
+				<el-form-item label="导入系统人员:" required style="margin-left: 40px;">
 						<el-upload class="upload-demo" ref="upload" multiple action="" :limit="1"
 							:on-preview="handlePreview" :on-remove="handleRemove" :on-change="handleChange"
 							:http-request="httpRequest" :file-list="fileList" :auto-upload="false" accept=".xls, .xlsx"
 							:before-upload="beforeAvatarUpload">
 							<template #trigger>
-								<el-button type="primary">选取文件</el-button>
+								<el-button type="primary" size="small">选取文件</el-button>
 							</template>
-							<el-button type="primary" style="width: 50%;position: relative;top: 80px;"
+							<el-button type="primary" size="small" style="margin-left: 30px;"
 								@click="submitUpload">提 交
 							</el-button>
 						</el-upload>
-					</el-form-item>
-				
+				</el-form-item>
 			</el-form>
-		</el-col>
-	</el-row>
+			
+			
+	</div>
+	<el-table :data="adminList"  border style="width: 100%; margin: 0 auto;" v-loading="loading" height="450" stripe :header-cell-style="{background:'#F2F2F2'}" v-if="adminShow">
+		<el-table-column prop="userId" label="用户ID" align="center" />
+		<el-table-column prop="userName"  label="用户姓名" align="center" />
+		<el-table-column prop="userPhone" label="用户手机号" align="center" />
+	</el-table>
+	
+	<el-table :data="teacherList"  border style="width: 100%; margin: 0 auto;" v-loading="loading" height="450" stripe :header-cell-style="{background:'#F2F2F2'}" v-if="teacherShow">
+		<el-table-column prop="userId" label="用户ID" align="center"  />
+		<el-table-column prop="userName"  label="用户姓名" align="center" />
+		<el-table-column prop="userPhone" label="用户手机号" align="center"  />
+	
+	</el-table>
+	
+	<el-table :data="studentList"  border style="width: 100%; margin: 0 auto;" v-loading="loading" height="450" stripe :header-cell-style="{background:'#F2F2F2'}" v-if="studentShow">
+		<el-table-column prop="userId" label="用户ID" align="center"   />
+		<el-table-column prop="userName"  label="用户姓名" align="center" />
+		<el-table-column prop="userPhone" label="用户手机号" align="center"  />
+	
+	</el-table>
 </template>
 
 <script>
 	import request from "@/utils/request";
+	import {
+		ref
+	} from 'vue'
 	export default {
 		name: "AdminAddUsers",
 		data() {
 			return {
+				options: ref([{
+						value: '0',
+						label: '管理员',
+					},
+					{
+						value: '1',
+						label: '教师',
+					},
+					{
+						value: '2',
+						label: '学生',
+					},
+				]),
+				userType: ref('0'),
 				fileList: [],
+				studentList:[],
+				teacherList:[],
+				adminList:[],
+				adminShow:true,
+				teacherShow:false,
+				studentShow:false
+				
 			}
 		},
+		created(){
+			request.get('/getAllUsers').then(res => {
+				console.log(res.data.STUDENT)
+				if (res.code === '0') {
+					this.studentList=res.data.STUDENT
+					this.teacherList=res.data.TEACHER
+					this.adminList=res.data.ADMIN
+				} else {
+					this.$message({
+						type: "error",
+						message: res.msg
+					})
+				}
+			})
+		},
 		methods: {
+			changeUserType(){
+				if(this.userType==="0"){
+					this.adminShow=true
+					this.studentShow=false
+					this.teacherShow=false
+				}else if(this.userType==="1"){
+					this.adminShow=false
+					this.studentShow=false
+					this.teacherShow=true
+				}else{
+					this.adminShow=false
+					this.studentShow=true
+					this.teacherShow=false
+				}
+			},
 			httpRequest(param) {
 				console.log(param.file)
 				let fileObj = param.file // 相当于input里取得的files

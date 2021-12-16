@@ -51,8 +51,8 @@
 				<!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
 			</el-sub-menu>
 			<el-sub-menu index="6" v-if="user.userType == 'ADMIN'">
-				<template #title><i class="el-icon-s-order"></i>&nbsp;人 员 管 理</template>
-				<el-menu-item index="/adminAddUsers"><i class="el-icon-s-tools"></i>人 员 导 入</el-menu-item>
+				<template #title><i class="el-icon-set-up"></i>&nbsp;用 户 管 理</template>
+				<el-menu-item index="/adminAddUsers"><i class="el-icon-place"></i>用户列表/导入</el-menu-item>
 				<el-menu-item index="/adminAddAdmin"><i class="el-icon-s-tools"></i>管理员设置</el-menu-item>
 				<!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
 			</el-sub-menu>
