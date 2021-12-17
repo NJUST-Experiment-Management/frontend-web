@@ -23,10 +23,12 @@
 							<el-table-column label="实验类型" width="150px">
 								　<template v-slot="scope">
 									<el-tag type="primary" v-if="this.user.userType==='TEACHER'"
-										style="width: 100px;text-align: center;" >{{scope.row.isOpening===true?'开放实验':'课程实验' }}</el-tag>
-								<el-tag type="primary" v-if="this.user.userType==='ADMIN'" 
-									style="width: 100px; text-align: center;" >{{scope.row.isOpening===true?'开放实验':'课程实验/考试' }}</el-tag>
-	
+										style="width: 100px;text-align: center;">
+										{{scope.row.isOpening===true?'开放实验':'课程实验' }}</el-tag>
+									<el-tag type="primary" v-if="this.user.userType==='ADMIN'"
+										style="width: 100px; text-align: center;">
+										{{scope.row.isOpening===true?'开放实验':'课程实验/考试' }}</el-tag>
+
 								</template>
 							</el-table-column>
 							<el-table-column align="center" label="操作">
@@ -77,6 +79,14 @@
 		created() {
 			let userStr = sessionStorage.getItem("user")
 			this.user = JSON.parse(userStr)
+
+			if (this.user.userType === "STUDENT") {
+				this.$router.push("/login")
+				this.$message({
+					type: "error",
+					message: "无权限"
+				})
+			}
 			this.load()
 		},
 		methods: {
@@ -86,7 +96,7 @@
 					this.courses = res.data
 				})
 			},
-			studentList(id,name){
+			studentList(id, name) {
 				sessionStorage.setItem("studentCourseId", id)
 				sessionStorage.setItem("courseName", name)
 				this.$router.push("/studentCourseList")

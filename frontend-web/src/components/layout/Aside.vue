@@ -11,8 +11,12 @@
 						名&nbsp;{{user.userName}}</el-tag>
 					<el-tag style="display: block;margin-bottom: 5px"><i
 							class="el-icon-view"></i>学工号&nbsp;{{user.userId}}</el-tag>
-					<el-tag style="display: block;margin-bottom: 5px"><i
-							class="el-icon-postcard"></i>身份&nbsp;{{user.userType}}</el-tag>
+					<el-tag style="display: block;margin-bottom: 5px" v-if="user.userType==='ADMIN'"><i
+							class="el-icon-postcard"></i>身份&nbsp;管理员</el-tag>
+							<el-tag style="display: block;margin-bottom: 5px" v-if="user.userType==='STUDENT'"><i
+									class="el-icon-postcard"></i>身份&nbsp;学生</el-tag>
+									<el-tag style="display: block;margin-bottom: 5px" v-if="user.userType==='TEACHER'"><i
+											class="el-icon-postcard"></i>身份&nbsp;教师</el-tag>
 					<el-tag style="display: block;"><i class="el-icon-copy-document"></i>
 						<el-button type="text" size="small" @click="updateInfo">密 码 修 改</el-button>
 					</el-tag>

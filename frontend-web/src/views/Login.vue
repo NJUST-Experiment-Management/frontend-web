@@ -4,17 +4,17 @@
 			<el-row class="row-bg" justify="center" style="padding: 0 5%  0  5% ;margin-top: 20px;width: 100%">
 				<!--    <el-col :span="8"></el-col>-->
 				<el-col :span="10.5">
-					<el-card style="height:510px;width:500px;overflow-x:hidden;overflow-y: hidden"
+					<el-card style="height:580px;width:500px;overflow-x:hidden;overflow-y: hidden"
 						:body-style="{ padding: '0px' }">
-						<img :src="img1" width="500" height="570" style="display: flex;" />
+						<img :src="img1" width="500" height="580" style="display: flex;" />
 					</el-card>
 
 				</el-col>
 				<el-col :span="8">
-					<el-card class="box-card" :body-style="{ padding: '0px' }">
+					<el-card class="box-card" :body-style="{ padding: '0px' }" style="height: 580px;padding-top: 15px;">
 						<el-form ref="form" :model="form" :rules="rules"
 							style="padding: 0 5%  0  5% ;margin-top: 20px;width: 90%;">
-							<el-form-item><img :src="schoolLogo" width="350" height="50" /></el-form-item>
+							<el-form-item><img :src="schoolLogo" width="370" height="80" /></el-form-item>
 							<el-form-item prop="id">
 								<i class="el-icon-user"></i>用户名
 								<el-input v-model="form.userId" placeholder="请输入账号" size="mini"></el-input>

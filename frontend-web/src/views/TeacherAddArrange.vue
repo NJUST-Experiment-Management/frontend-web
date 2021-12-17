@@ -231,6 +231,13 @@
 		created() {
 			let userStr = sessionStorage.getItem("user")
 			this.user = JSON.parse(userStr)
+			if(this.user.userType==="STUDENT"){
+				this.$router.push("/login")
+				this.$message({
+					type: "error",
+					message: "无权限"
+				})
+			}
 			this.addForm.courseId = sessionStorage.getItem("addCourseId");
 			this.addForm.courseName = sessionStorage.getItem("courseName")
 			request.get("/studentList", {

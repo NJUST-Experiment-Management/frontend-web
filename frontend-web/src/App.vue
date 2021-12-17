@@ -64,7 +64,8 @@
 					display: {
 						position: 'right',
 						width: 210,
-						height: 480
+						height: 480,
+						vOffset:-100
 					}, //调整大小,和位置
 					mobile: {
 						show: true
@@ -72,7 +73,10 @@
 					log: false,
 				})
 			}, 1000)
+			
+			
 			//
 		},
+		
 	}
 </script>
