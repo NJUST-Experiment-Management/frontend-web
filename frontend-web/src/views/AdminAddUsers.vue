@@ -86,6 +86,15 @@
 			}
 		},
 		created(){
+			let userStr = sessionStorage.getItem("user")
+			this.user = JSON.parse(userStr)
+			if(this.user.userType!=="ADMIN"){
+				this.$router.push("/login")
+				this.$message({
+					type: "error",
+					message: "无权限"
+				})
+			}
 			request.get('/getAllUsers').then(res => {
 				console.log(res.data.STUDENT)
 				if (res.code === '0') {
@@ -99,18 +108,6 @@
 					})
 				}
 			})
-		},
-		created() {
-			let userStr = sessionStorage.getItem("user")
-			this.user = JSON.parse(userStr)
-			if(this.user.userType!=="ADMIN"){
-				this.$router.push("/login")
-				this.$message({
-					type: "error",
-					message: "无权限"
-				})
-			}
-			
 		},
 		methods: {
 			changeUserType(){

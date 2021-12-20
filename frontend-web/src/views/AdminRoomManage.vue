@@ -89,6 +89,18 @@
 					message: "无权限"
 				})
 			}
+			request.get('/room/all').then(res => {
+				console.log(res)
+				if (res.code === "0") {
+					this.rooms = res.data
+				} else {
+					this.$message({
+						type: "error",
+						message: res.msg
+					})
+				}
+			
+			})
 			
 		},
 		methods: {
@@ -200,22 +212,6 @@
 				this.seatsVisible = true;
 			}
 		},
-		created() {
-			//获取后端的所有room的信息
-			request.get('/room/all').then(res => {
-				console.log(res)
-				if (res.code === "0") {
-					this.rooms = res.data
-				} else {
-					this.$message({
-						type: "error",
-						message: res.msg
-					})
-				}
-
-			})
-
-		}
 	}
 </script>
 

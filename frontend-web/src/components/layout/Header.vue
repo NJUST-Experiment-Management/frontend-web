@@ -33,6 +33,10 @@
 		},
 		created() {
 			this.user = JSON.parse(sessionStorage.getItem("user"));
+			if(this.user===null){
+				this.$router.push("/login")
+				return
+			}
 			this.getMessageNum()
 		},
 		computed:{

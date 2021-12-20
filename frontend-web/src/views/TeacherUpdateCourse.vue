@@ -68,6 +68,7 @@
 					message: "无权限"
 				})
 			}
+			this.form.courseId = sessionStorage.getItem("updateCourseId");
 		},
 		methods: {
 			prePage() {
@@ -101,9 +102,6 @@
 					}
 				})
 			},
-		},
-		mounted() {
-			this.form.courseId = sessionStorage.getItem("updateCourseId");
 		}
 	}
 </script>

@@ -109,6 +109,18 @@
 					message: "无权限"
 				})
 			}
+			request.get('/room/all').then(res => {
+				console.log(res)
+				if (res.code === "0") {
+					this.roomsInfo = res.data
+				} else {
+					this.$message({
+						type: "error",
+						message: res.msg
+					})
+				}
+			
+			})
 			
 		},
 		methods: {
@@ -215,20 +227,6 @@
 
 				})
 			}
-		},
-		created() {
-			request.get('/room/all').then(res => {
-				console.log(res)
-				if (res.code === "0") {
-					this.roomsInfo = res.data
-				} else {
-					this.$message({
-						type: "error",
-						message: res.msg
-					})
-				}
-
-			})
 		},
 	}
 </script>
