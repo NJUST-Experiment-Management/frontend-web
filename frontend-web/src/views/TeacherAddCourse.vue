@@ -68,6 +68,17 @@
 				uploadFileList: [],
 			}
 		},
+		created() {
+			let userStr = sessionStorage.getItem("user")
+			this.user = JSON.parse(userStr)
+			if(this.user.userType==="STUDENT"){
+				this.$router.push("/login")
+				this.$message({
+					type: "error",
+					message: "无权限"
+				})
+			}
+			},
 		methods: {
 			httpRequest(param) {
 				console.log(param.file)

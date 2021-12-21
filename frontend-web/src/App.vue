@@ -1,6 +1,6 @@
 <template>
 	<el-config-provider :locale="locale">
-		<router-view  v-wechat-title='$route.meta.title'/>
+		<router-view v-wechat-title='$route.meta.title' />
 	</el-config-provider>
 </template>
 
@@ -51,21 +51,32 @@
 				    */
 
 			setTimeout(() => {
-				            window.L2Dwidget.init({
-				                pluginRootPath: '../static/live2dw/',
-				                pluginJsPath: 'lib/',
-				                pluginModelPath: 'live2d-widget-model-koharu/assets/', //中间这个haru_2就是你的老婆,想换个老婆,换这个就可以了
-				                tagMode: false,
-				                debug: false,
-				                model: { jsonPath: '../static/live2dw/live2d-widget-model-koharu/assets/koharu.model.json' ,
-								scale:1
-								}, 
-				                display: { position: 'right', width: 210, height: 480 },  //调整大小,和位置
-				                mobile: { show: true },   //要不要盯着你的鼠标看
-				                log: false,
-				            })
-				        }, 1000)
+				window.L2Dwidget.init({
+					pluginRootPath: '../static/live2dw/',
+					pluginJsPath: 'lib/',
+					pluginModelPath: 'live2d-widget-model-koharu/assets/', //中间这个haru_2就是你的老婆,想换个老婆,换这个就可以了
+					tagMode: false,
+					debug: false,
+					model: {
+						jsonPath: '../static/live2dw/live2d-widget-model-koharu/assets/koharu.model.json',
+						scale: 1
+					},
+					display: {
+						position: 'right',
+						width: 210,
+						height: 480,
+						vOffset:-100
+					}, //调整大小,和位置
+					mobile: {
+						show: true
+					}, //要不要盯着你的鼠标看
+					log: false,
+				})
+			}, 1000)
+			
+			
 			//
 		},
+		
 	}
 </script>

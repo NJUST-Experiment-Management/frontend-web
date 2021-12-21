@@ -43,6 +43,16 @@
 			}
 		},
 		created() {
+			let userStr = sessionStorage.getItem("user")
+			this.user = JSON.parse(userStr)
+			
+			if (this.user.userType === "STUDENT") {
+				this.$router.push("/login")
+				this.$message({
+					type: "error",
+					message: "无权限"
+				})
+			}
 			this.courseId = sessionStorage.getItem("deleteCourseId");
 			this.courseName = sessionStorage.getItem("courseName", name)
 			this.loading = true

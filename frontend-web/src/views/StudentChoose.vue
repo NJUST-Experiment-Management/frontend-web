@@ -41,7 +41,7 @@
 <script>
 	import request from "@/utils/request";
 	export default {
-		name: "StudentOpeningClass",
+		name: "StudentChoose",
 		data() {
 			return {
 				user: {},
@@ -105,6 +105,13 @@
 		created() {
 			let userStr = sessionStorage.getItem("user")
 			this.user = JSON.parse(userStr)
+			if(this.user.userType!=="STUDENT"){
+				this.$router.push("/login")
+				this.$message({
+					type: "error",
+					message: "无权限"
+				})
+			}
 			this.ruleForm.coursename = sessionStorage.getItem("coursename")
 			this.ruleForm.courseid = sessionStorage.getItem("courseid")
 		},

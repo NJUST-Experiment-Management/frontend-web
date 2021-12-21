@@ -11,8 +11,12 @@
 						名&nbsp;{{user.userName}}</el-tag>
 					<el-tag style="display: block;margin-bottom: 5px"><i
 							class="el-icon-view"></i>学工号&nbsp;{{user.userId}}</el-tag>
-					<el-tag style="display: block;margin-bottom: 5px"><i
-							class="el-icon-postcard"></i>身份&nbsp;{{user.userType}}</el-tag>
+					<el-tag style="display: block;margin-bottom: 5px" v-if="user.userType==='ADMIN'"><i
+							class="el-icon-postcard"></i>身份&nbsp;管理员</el-tag>
+							<el-tag style="display: block;margin-bottom: 5px" v-if="user.userType==='STUDENT'"><i
+									class="el-icon-postcard"></i>身份&nbsp;学生</el-tag>
+									<el-tag style="display: block;margin-bottom: 5px" v-if="user.userType==='TEACHER'"><i
+											class="el-icon-postcard"></i>身份&nbsp;教师</el-tag>
 					<el-tag style="display: block;"><i class="el-icon-copy-document"></i>
 						<el-button type="text" size="small" @click="updateInfo">密 码 修 改</el-button>
 					</el-tag>
@@ -51,8 +55,8 @@
 				<!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
 			</el-sub-menu>
 			<el-sub-menu index="6" v-if="user.userType == 'ADMIN'">
-				<template #title><i class="el-icon-s-order"></i>&nbsp;人 员 管 理</template>
-				<el-menu-item index="/adminAddUsers"><i class="el-icon-s-tools"></i>人 员 导 入</el-menu-item>
+				<template #title><i class="el-icon-set-up"></i>&nbsp;用 户 管 理</template>
+				<el-menu-item index="/adminAddUsers"><i class="el-icon-place"></i>用户列表/导入</el-menu-item>
 				<el-menu-item index="/adminAddAdmin"><i class="el-icon-s-tools"></i>管理员设置</el-menu-item>
 				<!-- <el-menu-item index="/adminMsgHistory"><i class="el-icon-copy-document"></i>消 息 管 理</el-menu-item> -->
 			</el-sub-menu>
@@ -104,6 +108,11 @@
 		},
 		created() {
 			this.user = JSON.parse(sessionStorage.getItem("user"));
+			console.log('23123124',this.user)
+			if(this.user===null){
+				this.$router.push("/login")
+				return
+			}
 			this.getMessageNum()
 		},
 		methods: {

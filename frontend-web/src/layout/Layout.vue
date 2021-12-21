@@ -24,8 +24,18 @@
 			Footer,
 		},
 		name: "Layout",
-
+		created() {
+			let userStr = sessionStorage.getItem("user")
+			this.user = JSON.parse(userStr)
+			if(this.user===null){
+				this.$router.push("/login")
+			}
 	}
+		}
+		
+	
+	
+	
 </script>
 
 <style scoped>

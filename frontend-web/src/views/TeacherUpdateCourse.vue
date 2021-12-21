@@ -57,6 +57,19 @@
 				},
 			}
 		},
+		created(){
+			let userStr = sessionStorage.getItem("user")
+			this.user = JSON.parse(userStr)
+			
+			if (this.user.userType === "STUDENT") {
+				this.$router.push("/login")
+				this.$message({
+					type: "error",
+					message: "无权限"
+				})
+			}
+			this.form.courseId = sessionStorage.getItem("updateCourseId");
+		},
 		methods: {
 			prePage() {
 				this.$router.push("/teacherAdjustCourse")
@@ -89,9 +102,6 @@
 					}
 				})
 			},
-		},
-		mounted() {
-			this.form.courseId = sessionStorage.getItem("updateCourseId");
 		}
 	}
 </script>

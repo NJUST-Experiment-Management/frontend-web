@@ -138,14 +138,6 @@ const routes = [{
 					title:'课程安排管理'
 				}
 			},
-			{
-				path: '/studentCourseList',
-				name: 'StudentCourseList',
-				component: () => import('@/views/StudentCourseList'),
-				meta:{
-					title:'课程学生列表'
-				}
-			},
 
 			// 学生路由
 			{
@@ -189,11 +181,11 @@ const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
 	routes
 })
-// 限制某些页面禁止未登录访问
-let limitPagePath = ["/lab"]
+
+let okpath = ["/login"]
 
 router.beforeEach((to, from, next) => {
-	if (limitPagePath.includes(to.path)) {
+	if (!okpath.includes(to.path)) {
 		// 判断sessionStorage是否保存了用户信息
 		let userStr = sessionStorage.getItem("user") || "{}"
 		let user = JSON.parse(userStr)
